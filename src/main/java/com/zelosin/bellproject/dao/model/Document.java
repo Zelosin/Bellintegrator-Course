@@ -10,15 +10,22 @@ import javax.persistence.*;
 @Table(name = "Document")
 public class Document {
 
+    /**
+     * Идентификатор
+     */
     @Id
-    @Column(name = "Id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-   /* @Column(name = "Assign_Date", nullable = false)
+    /* TODO: работа с датой
+    @Column(name = "Assign_Date", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date date;*/
 
+    /**
+     * Описание документа
+     */
     @ManyToOne(
             cascade = {
                 CascadeType.DETACH,
@@ -26,9 +33,12 @@ public class Document {
                 CascadeType.PERSIST,
                 CascadeType.REFRESH
     })
-    @JoinColumn(name = "Document_info_id")
+    @JoinColumn(name = "document_type_id")
     private DocumentType documentInfo;
 
+    /**
+     * Сотрудник, к которму привязан документ
+     */
     @OneToOne(
             cascade = {
                 CascadeType.DETACH,

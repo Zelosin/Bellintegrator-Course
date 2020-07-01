@@ -13,33 +13,33 @@ import java.util.List;
 public class Organization {
 
     @Id
-    @Column(name = "Id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "Name", nullable = false, length = 20)
+    @Column(name = "name", nullable = false, length = 20)
     private String name;
 
-    @Column(name = "Full_Name", nullable = false, length = 45)
+    @Column(name = "full_name", nullable = false, length = 45)
     private String fullName;
 
-    @Column(name = "INN", length = 15)
+    @Column(name = "inn", length = 15)
     private long INN;
 
-    @Column(name = "KPP", length = 15)
+    @Column(name = "kpp", length = 15)
     private long KPP;
 
-    @Column(name = "Address", length = 45)
+    @Column(name = "address", length = 45)
     private String address;
 
-    @Column(name = "Phone", length = 20)
+    @Column(name = "phone", length = 20)
     private String phone;
 
-    @Column(name = "Is_Active")
+    @Column(name = "is_active")
     private boolean isActive;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Base_Country_Id")
+    @JoinColumn(name = "base_country_id")
     private Country baseCountry;
 
     @OneToMany(

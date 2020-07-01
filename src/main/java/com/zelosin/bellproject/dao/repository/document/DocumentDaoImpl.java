@@ -9,6 +9,9 @@ import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * {@inheritDoc}
+ */
 @Repository
 public class DocumentDaoImpl implements DocumentDao {
 
@@ -18,6 +21,9 @@ public class DocumentDaoImpl implements DocumentDao {
         this.entityManager = entityManager;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<DocumentType> getDocumentTypes() {
         List<DocumentType> returningCollection = new ArrayList<>();

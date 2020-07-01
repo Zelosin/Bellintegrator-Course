@@ -9,20 +9,32 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "document_type")
+@Table(name = "Document_Type")
 public class DocumentType {
 
+    /**
+     * Идентификатор
+     */
     @Id
-    @Column(name = "Id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "Name", length = 45, nullable = false)
+    /**
+     * Название
+     */
+    @Column(name = "name", length = 45, nullable = false)
     private String name;
 
-    @Column(name = "Code")
+    /**
+     * Код
+     */
+    @Column(name = "code")
     private int code;
 
+    /**
+     * Список типовых документов
+     */
     @OneToMany(
             mappedBy = "documentInfo",
             fetch = FetchType.LAZY,
@@ -30,8 +42,10 @@ public class DocumentType {
     )
     private List<Document> documentList = new ArrayList<>();
 
-
-
+    /**
+     * Добавление типового документа в список
+     * @param document - типовой документ
+     */
     public synchronized void addDocument(Document document){
         document.setDocumentInfo(this);
         documentList.add(document);

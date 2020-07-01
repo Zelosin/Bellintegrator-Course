@@ -9,6 +9,9 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * {@inheritDoc}
+ */
 @Repository
 public class CountryDaoImpl implements CountryDao{
 
@@ -18,8 +21,10 @@ public class CountryDaoImpl implements CountryDao{
         this.entityManager = entityManager;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    @Transactional
     public List<Country> getCountryList() {
         List<Country> returningCollection = new ArrayList<>();
         TypedQuery<Country> query = entityManager

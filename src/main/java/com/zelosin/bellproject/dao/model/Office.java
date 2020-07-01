@@ -9,21 +9,21 @@ import javax.persistence.*;
 public class Office {
 
     @Id
-    @Column(name = "Id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "Name", length = 20, nullable = false)
+    @Column(name = "name", length = 20, nullable = false)
     private String name;
 
-    @Column(name = "Phone", length = 20)
+    @Column(name = "phone", length = 20)
     private String phone;
 
-    @Column(name = "Is_Active")
+    @Column(name = "is_Active")
     private boolean isActive;
 
     @ManyToOne
-    @JoinColumn(name = "Office_Country_Id")
+    @JoinColumn(name = "office_country_id")
     private Country officeCountry;
 
     @ManyToOne(cascade = {
@@ -32,7 +32,7 @@ public class Office {
             CascadeType.PERSIST,
             CascadeType.REFRESH
     })
-    @JoinColumn(name = "Organization_Id")
+    @JoinColumn(name = "organization_id")
     private Organization organization;
 
 }

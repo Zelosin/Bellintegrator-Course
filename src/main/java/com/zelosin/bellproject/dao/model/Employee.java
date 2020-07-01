@@ -12,44 +12,71 @@ import java.util.List;
 @Table(name = "Employee")
 public class Employee {
 
+    /**
+     * Идентификатор
+     */
     @Id
-    @Column(name = "Id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "First_Name", nullable = false, length = 20)
+    /**
+     * Имя
+     */
+    @Column(name = "first_name", nullable = false, length = 20)
     private String firstName;
 
-    @Column(name = "Second_Name", nullable = false, length = 20)
+    /**
+     * Фамилия
+     */
+    @Column(name = "second_name", nullable = false, length = 20)
     private String secondName;
 
-    @Column(name = "Middle_Name", nullable = false, length = 20)
+    /**
+     * Отчество
+     */
+    @Column(name = "middle_name", nullable = false, length = 20)
     private String middleName;
 
-    @Column(name = "Phone", length = 20)
+    /**
+     * Телефон
+     */
+    @Column(name = "phone", length = 20)
     private String phone;
 
-    @Column(name = "Is_Identified")
+    /**
+     * Признак идентифицированности
+     */
+    @Column(name = "is_identified")
     private boolean isIdentified;
 
+    /**
+     * Должность
+     */
     @ManyToOne(cascade = {
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST,
             CascadeType.REFRESH
     })
-    @JoinColumn(name = "Position_Id")
+    @JoinColumn(name = "position_id")
     private Position position;
 
+    /**
+     * Офис сотрудника
+     */
     @ManyToOne(cascade = {
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST,
             CascadeType.REFRESH
     })
-    @JoinColumn(name = "Office_Id")
+    @JoinColumn(name = "office_id")
     private Office office;
 
+    /**
+     * Список граждаств сотрудника
+     */
     @OneToMany(
             mappedBy = "employee",
             fetch = FetchType.EAGER,
@@ -57,13 +84,19 @@ public class Employee {
     )
     private List<Citizenship> citizenshipList = new ArrayList<>();
 
+    /**
+     * Документ сотрудника
+     */
     @OneToOne(
             cascade = CascadeType.ALL
     )
-    @JoinColumn(name = "Document_Id")
+    @JoinColumn(name = "document_id")
     private Document document;
 
-
+    /**
+     * Добавление гражданста сотруднику
+     * @param citizenship - новое гражданство
+     */
     public synchronized void addCitizenship(Citizenship citizenship){
         citizenship.setEmployee(this);
         citizenshipList.add(citizenship);

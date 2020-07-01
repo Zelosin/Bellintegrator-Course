@@ -9,14 +9,23 @@ import javax.persistence.*;
 @Table(name = "Country")
 public class Country {
 
+    /**
+     * Идентификатор
+     */
     @Id
-    @Column(name = "Id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "Code")
+    /**
+     * Код
+     */
+    @Column(name = "code")
     private int code;
 
+    /**
+     * Название
+     */
     @Column(name = "Name", length = 20, nullable = false)
     private String name;
 
