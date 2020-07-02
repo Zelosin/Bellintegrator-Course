@@ -19,6 +19,12 @@ public class Citizenship {
     private int id;
 
     /**
+     * Служебное поле hibernate
+     */
+    @Version
+    private Integer version;
+
+    /**
      * Название
      */
     @Column(name = "name", nullable = false, length = 20)

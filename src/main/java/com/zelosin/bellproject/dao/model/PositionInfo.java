@@ -6,8 +6,8 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "Country")
-public class Country {
+@Table(name = "Employee_Position_Info")
+public class PositionInfo {
 
     /**
      * Идентификатор
@@ -24,15 +24,9 @@ public class Country {
     private Integer version;
 
     /**
-     * Код
+     * Название должности
      */
-    @Column(name = "code")
-    private int code;
-
-    /**
-     * Название
-     */
-    @Column(name = "Name", length = 20, nullable = false)
+    @Column(name = "Name", length = 30, nullable = false)
     private String name;
 
 }

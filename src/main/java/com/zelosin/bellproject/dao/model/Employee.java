@@ -21,6 +21,12 @@ public class Employee {
     private int id;
 
     /**
+     * Служебное поле hibernate
+     */
+    @Version
+    private Integer version;
+
+    /**
      * Имя
      */
     @Column(name = "first_name", nullable = false, length = 20)
@@ -53,7 +59,7 @@ public class Employee {
     /**
      * Должность
      */
-    @ManyToOne(cascade = {
+    @OneToOne(cascade = {
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST,
@@ -88,9 +94,9 @@ public class Employee {
      * Документ сотрудника
      */
     @OneToOne(
-            cascade = CascadeType.ALL
+            cascade = CascadeType.ALL,
+            mappedBy = "employee"
     )
-    @JoinColumn(name = "document_id")
     private Document document;
 
     /**

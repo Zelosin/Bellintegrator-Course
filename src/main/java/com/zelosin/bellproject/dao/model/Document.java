@@ -4,6 +4,7 @@ package com.zelosin.bellproject.dao.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @Entity
@@ -18,10 +19,18 @@ public class Document {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    /* TODO: работа с датой
-    @Column(name = "Assign_Date", nullable = false)
+    /**
+     * Служебное поле hibernate
+     */
+    @Version
+    private Integer version;
+
+    /**
+     * Дата удостоверения
+     */
+    @Column(name = "assign_date", nullable = false)
     @Temporal(TemporalType.DATE)
-    private Date date;*/
+    private Date date;
 
     /**
      * Описание документа
@@ -45,10 +54,9 @@ public class Document {
                 CascadeType.MERGE,
                 CascadeType.PERSIST,
                 CascadeType.REFRESH
-            },
-            mappedBy = "document"
+            }
     )
+    @JoinColumn(name = "employee_id")
     private Employee employee;
-
 
 }

@@ -21,9 +21,15 @@ public class DocumentType {
     private int id;
 
     /**
+     * Служебное поле hibernate
+     */
+    @Version
+    private Integer version;
+
+    /**
      * Название
      */
-    @Column(name = "name", length = 45, nullable = false)
+    @Column(name = "name", length = 150, nullable = false)
     private String name;
 
     /**
@@ -31,24 +37,4 @@ public class DocumentType {
      */
     @Column(name = "code")
     private int code;
-
-    /**
-     * Список типовых документов
-     */
-    @OneToMany(
-            mappedBy = "documentInfo",
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL
-    )
-    private List<Document> documentList = new ArrayList<>();
-
-    /**
-     * Добавление типового документа в список
-     * @param document - типовой документ
-     */
-    public synchronized void addDocument(Document document){
-        document.setDocumentInfo(this);
-        documentList.add(document);
-    }
-
 }
