@@ -1,10 +1,7 @@
 package com.zelosin.bellproject.controller;
 
-import com.zelosin.bellproject.dao.model.Document;
-import com.zelosin.bellproject.dao.model.Organization;
 import com.zelosin.bellproject.service.provider.country.CountryService;
 import com.zelosin.bellproject.service.provider.document.DocumentService;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,18 +24,12 @@ public class ManualController {
         this.documentService = documentService;
     }
 
-    @GetMapping("/test")
-    public String testMeth(){
-        Organization o = entityManager.unwrap(Session.class).find(Organization.class, 1);
-        return o.getFullName();
-    }
-
     @PostMapping("/docs")
     public Map provideDocumentTypesList(){
         return Collections.singletonMap("data", documentService.getDocumentTypes());
     }
 
-    @PostMapping("/countries")
+    @GetMapping("/countries")
     public Map provideCountryList(){
         return Collections.singletonMap("data", countryService.getCountryList());
     }

@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "Employee_Position")
-public class Position {
+public class Position{
 
     /**
      * Идентификатор
@@ -22,7 +22,7 @@ public class Position {
      * Служебное поле hibernate
      */
     @Version
-    private Integer version;
+    private Integer version = 0;
 
     /**
      * Офис должности

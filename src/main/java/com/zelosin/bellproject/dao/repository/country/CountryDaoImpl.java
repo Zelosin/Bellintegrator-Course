@@ -1,6 +1,7 @@
 package com.zelosin.bellproject.dao.repository.country;
 
 import com.zelosin.bellproject.dao.model.Country;
+import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -26,12 +27,6 @@ public class CountryDaoImpl implements CountryDao{
      */
     @Override
     public List<Country> getCountryList() {
-        List<Country> returningCollection = new ArrayList<>();
-        TypedQuery<Country> query = entityManager
-                .createQuery("SELECT c FROM Country c", Country.class);
-        if(query != null){
-            returningCollection = query.getResultList();
-        }
-        return returningCollection;
+        return entityManager.unwrap(Session.class).createQuery("from Country").list();
     }
 }
