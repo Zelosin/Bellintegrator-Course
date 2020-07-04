@@ -40,14 +40,14 @@ public class Office {
      * Признак активности
      */
     @Column(name = "is_Active")
-    private boolean isActive;
+    private Boolean isActive;
 
     /**
      * Страна офиса
      */
     @ManyToOne
     @JoinColumn(name = "office_country_id")
-    private Country officeCountry;
+    private Country baseCountry;
 
     /**
      * Организация офиса

@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.Collections;
 import java.util.Map;
 
-public interface BellController<Q> {
+public interface BellController<D> {
 
     Map getElementById(@PathVariable("id") int id);
-    Map updateElement(@Validated(Transfer.Update.class)  @RequestBody Q q);
-    Map saveElement( @Validated(Transfer.Save.class) @RequestBody Q q);
-    Map getElementList();
+    Map updateElement(@Validated(Transfer.Update.class)  @RequestBody D d);
+    Map saveElement( @Validated(Transfer.Save.class) @RequestBody D d);
+    Map getElementList(@Validated(Transfer.Filter.class)  @RequestBody D d);
 
 }

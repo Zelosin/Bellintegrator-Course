@@ -11,10 +11,10 @@ import java.util.Map;
 
 
 @RestController
-public abstract class AbstractBellController<Q> implements BellController<Q>{
-    protected final BellService<Q> bellService;
+public abstract class AbstractBellController<D, E> implements BellController<D>{
+    protected final BellService<D, E> bellService;
 
-    protected AbstractBellController(BellService<Q> bellService) {
+    protected AbstractBellController(BellService<D, E> bellService) {
         this.bellService = bellService;
     }
 
@@ -27,15 +27,16 @@ public abstract class AbstractBellController<Q> implements BellController<Q>{
 
     @Override
     @PostMapping("/save")
-    public Map saveElement( @Validated(Transfer.Save.class) @RequestBody Q q){
-        bellService.save(q);
+    public Map saveElement( @Validated(Transfer.Save.class) @RequestBody D d){
+        bellService.save(d);
         return Collections.singletonMap("result", "success");
     }
 
     @Override
     @PostMapping("/list")
     @JsonView(Transfer.ListView.class)
-    public Map getElementList(){
-        return Collections.singletonMap("data", bellService.getList());
+    public Map getElementList(D d){
+        return Collections.singletonMap("data", bellService.getList(d));
     }
+
 }

@@ -21,8 +21,6 @@ public class Organization {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull(groups = {Transfer.Update.class})
-    @JsonView({Transfer.ListView.class})
     private Integer id;
 
     /**
@@ -35,62 +33,49 @@ public class Organization {
      * Название
      */
     @Column(name = "name", nullable = false, length = 20)
-    @NotNull(groups = {Transfer.Save.class, Transfer.Update.class})
-    @JsonView({Transfer.ListView.class})
     private String name;
 
     /**
      * Полное название
      */
     @Column(name = "full_name", nullable = false, length = 45)
-    @NotNull(groups = {Transfer.Save.class, Transfer.Update.class})
-    @JsonView({Transfer.DetailView.class})
     private String fullName;
 
     /**
      * ИНН
      */
     @Column(name = "inn", length = 15)
-    @NotNull(groups = {Transfer.Save.class, Transfer.Update.class})
-    @JsonView({Transfer.DetailView.class})
-    private long INN;
+    private Long INN;
 
     /**
      * КПП
      */
     @Column(name = "kpp", length = 15)
-    @NotNull(groups = {Transfer.Save.class, Transfer.Update.class})
-    @JsonView({Transfer.DetailView.class})
-    private long KPP;
+    private Long KPP;
 
     /**
      * Адрес
      */
     @Column(name = "address", length = 45)
-    @NotNull(groups = {Transfer.Save.class, Transfer.Update.class})
-    @JsonView({Transfer.DetailView.class})
     private String address;
 
     /**
      * Телефон
      */
     @Column(name = "phone", length = 20)
-    @JsonView({Transfer.DetailView.class})
     private String phone;
 
     /**
      * Признак активности
      */
     @Column(name = "is_active")
-    @JsonView({Transfer.ListView.class})
-    private boolean isActive = true;
+    private Boolean isActive = true;
 
     /**
      * Страна организации
      */
     @ManyToOne
     @JoinColumn(name = "base_country_id")
-    @JsonView({Transfer.DetailView.class})
     private Country baseCountry;
 
     /**
