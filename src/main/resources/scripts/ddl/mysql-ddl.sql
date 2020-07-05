@@ -62,8 +62,8 @@ CREATE TABLE IF NOT EXISTS Document_Type(
 CREATE TABLE IF NOT EXISTS Employee(
     id                      INT NOT NULL            COMMENT 'Идентификатор' AUTO_INCREMENT,
     first_name              VARCHAR(20) NOT NULL    COMMENT 'Имя',
-    second_name             VARCHAR(20) NOT NULL    COMMENT 'Фамилия',
-    middle_name             VARCHAR(20) NOT NULL    COMMENT 'Отчество',
+    second_name             VARCHAR(20)             COMMENT 'Фамилия',
+    middle_name             VARCHAR(20)             COMMENT 'Отчество',
     phone                   VARCHAR(20)             COMMENT 'Телефон',
     position_id             INT NOT NULL            COMMENT 'Должность',
     office_id               INT NOT NULL            COMMENT 'Офис сотрудника',
@@ -74,20 +74,22 @@ CREATE TABLE IF NOT EXISTS Employee(
     FOREIGN KEY (office_id)                         REFERENCES Office(id)
 )COMMENT 'Сотрудники';
 
+CREATE UNIQUE INDEX UX_Document_Type_Code           ON Document_Type(code);
+
 CREATE TABLE IF NOT EXISTS Document(
     id                      INT NOT NULL            COMMENT 'Идентификатор' AUTO_INCREMENT,
-    document_type_id        INT NOT NULL            COMMENT 'Описание документа',
-    assign_date             DATE NOT NULL           COMMENT 'Дата удостоверения',
+    document_type           INT NOT NULL            COMMENT 'Описание документа',
+    assign_date             DATE                    COMMENT 'Дата удостоверения',
     employee_id             INT NOT NULL            COMMENT 'Сотрудник-владелец документа',
     version                 INT NOT NULL DEFAULT 0  COMMENT 'Служебное поле hibernate',
     PRIMARY KEY (id),
-    FOREIGN KEY (document_type_id)                  REFERENCES Document_Type(id),
+    FOREIGN KEY (document_type)                     REFERENCES Document_Type(id),
     FOREIGN KEY (employee_id)                       REFERENCES Employee(id)
 )COMMENT 'Документы';
 
 CREATE TABLE IF NOT EXISTS Citizenship(
     id                      INT NOT NULL            COMMENT 'Идентификатор' AUTO_INCREMENT,
-    name                    VARCHAR(20) NOT NULL    COMMENT 'Название',
+    name                    VARCHAR(20)             COMMENT 'Название',
     citizenship_country_id  INT NOT NULL            COMMENT 'Страна гражданства',
     employee_id             INT NOT NULL            COMMENT 'Сотрудник-владелец гражданства',
     version                 INT NOT NULL DEFAULT 0  COMMENT 'Служебное поле hibernate',
@@ -96,7 +98,7 @@ CREATE TABLE IF NOT EXISTS Citizenship(
     FOREIGN KEY (employee_id)                       REFERENCES Employee(id)
 )COMMENT 'Гражданства';
 
-CREATE UNIQUE INDEX UX_Document_Type_Code           ON Document_Type(code);
+
 CREATE UNIQUE INDEX UX_Country_Code                 ON Country(code);
 CREATE UNIQUE INDEX UX_Employee_Position_Id         ON Employee(position_id);
 CREATE UNIQUE INDEX UX_Document_Employee_Id         ON Document(employee_id);
@@ -119,5 +121,6 @@ CREATE INDEX        IX_Employee_Middle_Name         ON Employee(middle_name);
 CREATE INDEX        IX_Employee_Position_Id         ON Employee(position_id);
 
 CREATE INDEX        IX_Document_Employee_Id         ON Document(employee_id);
+CREATE INDEX        IX_Document_Document_Type       ON Document(document_type);
 
 CREATE INDEX        IX_Citizenship_Employee_Id      ON Citizenship(employee_id);

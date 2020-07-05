@@ -1,7 +1,9 @@
 package com.zelosin.bellproject.dao.mapper;
 
+import com.zelosin.bellproject.dao.model.Employee;
 import com.zelosin.bellproject.dao.model.Office;
 import com.zelosin.bellproject.dao.model.Organization;
+import com.zelosin.bellproject.view.EmployeeView;
 import com.zelosin.bellproject.view.OfficeView;
 import com.zelosin.bellproject.view.OrganizationView;
 import ma.glasnost.orika.MapperFactory;
@@ -27,6 +29,16 @@ public class OrikaMapperBuilder implements FactoryBean<MapperFactory> {
         mapperFactory.classMap(OfficeView.class, Office.class)
                 .field("baseCountryCode", "baseCountry.code")
                 .field("orgId", "organization.id")
+                .byDefault()
+                .register();
+
+        mapperFactory.classMap(EmployeeView.class, Employee.class)
+                .field("documentCode", "document.documentInfo.code")
+                .field("officeId", "office.id")
+                .field("positionId", "position.id")
+                .field("date", "document.date")
+                .field("citizenshipCode", "citizenship.citizenedCountry.code")
+
                 .byDefault()
                 .register();
 

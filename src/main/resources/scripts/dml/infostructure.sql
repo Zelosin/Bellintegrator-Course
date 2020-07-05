@@ -72,14 +72,12 @@ insert into employee(first_name, second_name, middle_name, phone, position_id, o
     values('Иван2', 'Иванов2', 'Иванович2', '+7777777', 2, 1);
 
 
-insert into document(document_type_id, assign_date, employee_id)
-    values(1, '2015-12-17', 1);
-insert into document(document_type_id, assign_date, employee_id)
-    values(2, '2019-12-19', 2);
+insert into document(document_type, assign_date, employee_id)
+    values(10, '2015-12-17', 1);
+insert into document(document_type, assign_date, employee_id)
+    values(12, '2019-12-19', 2);
 
 
-insert into citizenship(name, citizenship_country_id, employee_id)
-    values('Гражданство РФ', 1, 1);
 insert into citizenship(name, citizenship_country_id, employee_id)
     values('Гражданство США', 3, 1);
 insert into citizenship(name, citizenship_country_id, employee_id)

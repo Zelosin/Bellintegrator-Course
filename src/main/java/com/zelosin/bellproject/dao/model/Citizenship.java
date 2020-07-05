@@ -45,12 +45,7 @@ public class Citizenship {
     /**
      * Сотрудник, которому принадлежит гражданство
      */
-    @ManyToOne(cascade = {
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST,
-            CascadeType.REFRESH
-    })
+    @OneToOne
     @JoinColumn(name = "employee_id")
     private Employee employee;
 

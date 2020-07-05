@@ -42,16 +42,7 @@ public class OfficeDao extends AbstractBellDao<OfficeView, Office> {
 
     @Override
     public Office findById(int id) {
-        Office office;
-        TypedQuery<Office> officeTypedQuery  = entityManager.createQuery(
-                "SELECT o FROM Office o WHERE o.id=:ofcId", Office.class);
-        officeTypedQuery.setParameter("ofcId", id);
-        try {
-            office = officeTypedQuery.getSingleResult();
-        }catch (NoResultException e){
-            throw new DataBaseResultException("Идентификатор офиса задан неверно", e);
-        }
-        return office;
+        return findOfficeById(id);
     }
 
     @Override

@@ -48,7 +48,4 @@ public class Position{
     @JoinColumn(name = "position_info_id")
     private PositionInfo positionInfo;
 
-    @OneToOne(mappedBy = "position")
-    private Employee employee;
-
 }

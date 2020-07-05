@@ -83,12 +83,8 @@ public class Employee {
     /**
      * Список граждаств сотрудника
      */
-    @OneToMany(
-            mappedBy = "employee",
-            fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL
-    )
-    private List<Citizenship> citizenshipList = new ArrayList<>();
+    @OneToOne(mappedBy = "employee")
+    private Citizenship citizenship;
 
     /**
      * Документ сотрудника
@@ -99,12 +95,4 @@ public class Employee {
     )
     private Document document;
 
-    /**
-     * Добавление гражданста сотруднику
-     * @param citizenship - новое гражданство
-     */
-    public synchronized void addCitizenship(Citizenship citizenship){
-        citizenship.setEmployee(this);
-        citizenshipList.add(citizenship);
-    }
 }

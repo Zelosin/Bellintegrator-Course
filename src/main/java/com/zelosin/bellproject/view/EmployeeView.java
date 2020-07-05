@@ -12,6 +12,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -21,14 +22,14 @@ public class EmployeeView {
      * Идентификатор
      */
     @NotNull(groups = {Transfer.Update.class})
-    @Null(groups = {Transfer.Save.class, Transfer.Update.class})
+    @Null(groups = {Transfer.Save.class})
     @JsonView({Transfer.ListView.class, Transfer.DetailView.class})
     private Integer id;
 
     /**
      * Имя
      */
-    @Null(groups = {Transfer.Save.class, Transfer.Update.class})
+    @NotNull(groups = {Transfer.Save.class, Transfer.Update.class})
     @JsonView({Transfer.ListView.class, Transfer.DetailView.class})
     private String firstName;
 
@@ -47,7 +48,7 @@ public class EmployeeView {
     /**
      * Телефон
      */
-    @JsonView({Transfer.ListView.class, Transfer.DetailView.class})
+    @JsonView({Transfer.DetailView.class})
     private String phone;
 
     /**
@@ -59,20 +60,40 @@ public class EmployeeView {
     /**
      * Должность
      */
-    @NotNull(groups = {Transfer.Save.class})
+    @NotNull(groups = {Transfer.Save.class, Transfer.Update.class})
     @JsonView({Transfer.ListView.class, Transfer.DetailView.class})
     private Integer positionId;
 
     /**
      * Офис сотрудника
      */
-    @Null(groups = {Transfer.Save.class, Transfer.Update.class})
+    @NotNull(groups = {Transfer.Save.class, Transfer.ListView.class})
     @JsonView({Transfer.DetailView.class})
     private Integer officeId;
 
     /**
      * Документ сотрудника
      */
-    private Integer documentId;
-    
+    @JsonView({Transfer.DetailView.class})
+    private Integer documentCode;
+
+    /**
+     * Дата документа
+     */
+    @JsonView({Transfer.DetailView.class})
+    @Temporal(TemporalType.DATE)
+    private Date date;
+
+    /**
+     * Код гражданства
+     */
+    @JsonView({Transfer.DetailView.class})
+    private Integer citizenshipCode;
+
+    /**
+     * Название гражданства
+     */
+    @JsonView({Transfer.DetailView.class})
+    private Integer citizenshipName;
+
 }

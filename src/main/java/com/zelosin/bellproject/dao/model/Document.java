@@ -42,7 +42,7 @@ public class Document {
                 CascadeType.PERSIST,
                 CascadeType.REFRESH
     })
-    @JoinColumn(name = "document_type_id")
+    @JoinColumn(name = "document_type")
     private DocumentType documentInfo;
 
     /**
