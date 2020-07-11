@@ -78,55 +78,10 @@ insert into office(name, phone, office_country_id, organization_id)
 values('Google GR', '+5555555', 3, 2);
 
 
-
-insert into employee_position_info(name)
-values('Java junior developer');
-insert into employee_position_info(name)
-values('Java middle developer');
-insert into employee_position_info(name)
-values('Java senior developer');
-insert into employee_position_info(name)
-values('C# junior developer');
-insert into employee_position_info(name)
-values('HR');
-insert into employee_position_info(name)
-values('CEO');
-
-
-insert into employee_position(office_id, position_info_id)
-values(1, 1);
-insert into employee_position(office_id, position_info_id)
-values(1, 2);
-insert into employee_position(office_id, position_info_id)
-values(2, 3);
-insert into employee_position(office_id, position_info_id)
-values(2, 4);
-insert into employee_position(office_id, position_info_id)
-values(3, 1);
-insert into employee_position(office_id, position_info_id)
-values(3, 2);
-insert into employee_position(office_id, position_info_id)
-values(4, 3);
-insert into employee_position(office_id, position_info_id)
-values(4, 4);
-insert into employee_position(office_id, position_info_id)
-values(5, 6);
-insert into employee_position(office_id, position_info_id)
-values(5, 6);
-insert into employee_position(office_id, position_info_id)
-values(6, 6);
-insert into employee_position(office_id, position_info_id)
-values(6, 3);
-insert into employee_position(office_id, position_info_id)
-values(7, 6);
-insert into employee_position(office_id, position_info_id)
-values(7, 1);
-
-
-insert into employee(first_name, second_name, middle_name, phone, position_id, office_id)
-values('Иван', 'Иванов', 'Иванович', null, 1, 1);
-insert into employee(first_name, second_name, middle_name, phone, position_id, office_id)
-values('Иван2', 'Иванов2', 'Иванович2', '+7777777', 2, 1);
+insert into employee(first_name, second_name, middle_name, phone, position, office_id)
+values('Иван', 'Иванов', 'Иванович', null, 'Junior developer', 1);
+insert into employee(first_name, second_name, middle_name, phone, position, office_id)
+values('Иван2', 'Иванов2', 'Иванович2', '+7777777', 'CEO', 1);
 
 
 insert into document(document_type, assign_date, employee_id)

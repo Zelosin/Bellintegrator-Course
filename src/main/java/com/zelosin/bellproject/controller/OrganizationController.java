@@ -2,30 +2,21 @@ package com.zelosin.bellproject.controller;
 
 import com.zelosin.bellproject.controller.template.AbstractBellController;
 import com.zelosin.bellproject.dao.model.Organization;
-import com.zelosin.bellproject.dao.transfer.Transfer;
 import com.zelosin.bellproject.service.template.BellService;
-import com.zelosin.bellproject.view.OrganizationView;
+import com.zelosin.bellproject.view.filter.OrganizationViewFilter;
+import com.zelosin.bellproject.view.transfer.OrganizationViewTransfer;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Collections;
-import java.util.Map;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
 @RequestMapping("/api/organization")
-public class OrganizationController extends AbstractBellController<OrganizationView, Organization> {
+public class OrganizationController extends AbstractBellController<OrganizationViewFilter, OrganizationViewTransfer, Organization> {
 
-    protected OrganizationController(@Qualifier(value = "ORG_SER") BellService<OrganizationView, Organization> bellService) {
+    protected OrganizationController(@Qualifier(value = "ORG_SER")
+         BellService<OrganizationViewFilter, OrganizationViewTransfer, Organization> bellService) {
         super(bellService);
-    }
-
-    @Override
-    @PostMapping("/update")
-    public Map updateElement(@Validated(Transfer.Update.class)  @RequestBody OrganizationView organizationView) {
-        bellService.update(organizationView, organizationView.getId());
-        return Collections.singletonMap("result", "success");
     }
 
 }

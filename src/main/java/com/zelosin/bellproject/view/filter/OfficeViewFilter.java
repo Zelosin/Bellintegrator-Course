@@ -1,30 +1,27 @@
-package com.zelosin.bellproject.view;
+package com.zelosin.bellproject.view.filter;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.zelosin.bellproject.dao.model.Country;
-import com.zelosin.bellproject.dao.model.Organization;
-import com.zelosin.bellproject.dao.transfer.Transfer;
+import com.zelosin.bellproject.util.Transfer;
+import com.zelosin.bellproject.view.IdentifiedView;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
 @Data
-public class OfficeView {
-
-    /**
-     * Идентификатор
-     */
-    @NotNull(groups = {Transfer.Update.class})
-    @Null(groups = {Transfer.Save.class})
-    @JsonView({Transfer.ListView.class, Transfer.DetailView.class})
-    private Integer id;
+@EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
+@NoArgsConstructor
+public class OfficeViewFilter extends IdentifiedView {
 
     /**
      * Название
      */
     @JsonView({Transfer.ListView.class, Transfer.DetailView.class})
+    @NotNull(groups = {Transfer.Update.class})
     private String name;
 
     /**
@@ -38,12 +35,6 @@ public class OfficeView {
      */
     @JsonView({Transfer.ListView.class, Transfer.DetailView.class})
     private Boolean isActive;
-
-    /**
-     * Страна офиса
-     */
-    @JsonView({Transfer.DetailView.class})
-    private Integer baseCountryCode;
 
     /**
      * Организация офиса

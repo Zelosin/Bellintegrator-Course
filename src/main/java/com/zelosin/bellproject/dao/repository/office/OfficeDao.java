@@ -4,7 +4,8 @@ import com.zelosin.bellproject.dao.model.Office;
 import com.zelosin.bellproject.dao.model.Organization;
 import com.zelosin.bellproject.dao.repository.template.AbstractBellDao;
 import com.zelosin.bellproject.exception.DataBaseResultException;
-import com.zelosin.bellproject.view.OfficeView;
+import com.zelosin.bellproject.view.filter.OfficeViewFilter;
+import com.zelosin.bellproject.view.transfer.OfficeViewTransfer;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository("OFC_REP")
-public class OfficeDao extends AbstractBellDao<OfficeView, Office> {
+public class OfficeDao extends AbstractBellDao<OfficeViewFilter, OfficeViewTransfer, Office> {
     protected OfficeDao(EntityManager entityManager) {
         super(entityManager);
     }
@@ -28,16 +29,18 @@ public class OfficeDao extends AbstractBellDao<OfficeView, Office> {
         if(office.getBaseCountry() != null) {
             office.setBaseCountry(getCountryByCode(office.getBaseCountry().getCode()));
         }
-        Organization organization;
-        TypedQuery<Organization> organizationTypedQuery = entityManager.createQuery(
-                "SELECT o FROM Organization o WHERE o.id=:orgID", Organization.class);
-        organizationTypedQuery.setParameter("orgID", office.getOrganization().getId());
-        try {
-            organization = organizationTypedQuery.getSingleResult();
-        }catch (NoResultException e){
-            throw new DataBaseResultException("Идентификатор организации задан неверно", e);
+        if(office.getOrganization() != null) {
+            Organization organization;
+            TypedQuery<Organization> organizationTypedQuery = entityManager.createQuery(
+                    "SELECT o FROM Organization o WHERE o.id=:orgID", Organization.class);
+            organizationTypedQuery.setParameter("orgID", office.getOrganization().getId());
+            try {
+                organization = organizationTypedQuery.getSingleResult();
+            } catch (NoResultException e) {
+                throw new DataBaseResultException("Идентификатор организации задан неверно", e);
+            }
+            office.setOrganization(organization);
         }
-        office.setOrganization(organization);
     }
 
     @Override
@@ -46,24 +49,24 @@ public class OfficeDao extends AbstractBellDao<OfficeView, Office> {
     }
 
     @Override
-    public List<Office> getList(OfficeView officeView) {
+    public List<Office> getList(OfficeViewFilter officeViewFilter) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Office> criteriaQuery = criteriaBuilder.createQuery(Office.class);
         Root<Office> OfficeRoot = criteriaQuery.from(Office.class);
         criteriaQuery.select(OfficeRoot);
-        if(officeView != null){
-            Predicate filterPredicate = criteriaBuilder.equal(OfficeRoot.get("organization").get("id"), officeView.getOrgId());
-            if(officeView.getPhone() != null){
+        if(officeViewFilter != null){
+            Predicate filterPredicate = criteriaBuilder.equal(OfficeRoot.get("organization").get("id"), officeViewFilter.getOrgId());
+            if(officeViewFilter.getPhone() != null){
                 filterPredicate  = criteriaBuilder.and(filterPredicate, criteriaBuilder.equal(
-                        OfficeRoot.get("phone"), officeView.getPhone()));
+                        OfficeRoot.get("phone"), officeViewFilter.getPhone()));
             }
-            if(officeView.getName() != null){
+            if(officeViewFilter.getName() != null){
                 filterPredicate  = criteriaBuilder.and(filterPredicate, criteriaBuilder.equal(
-                        OfficeRoot.get("name"), officeView.getName()));
+                        OfficeRoot.get("name"), officeViewFilter.getName()));
             }
-            if(officeView.getIsActive() != null){
+            if(officeViewFilter.getIsActive() != null){
                 filterPredicate  = criteriaBuilder.and(filterPredicate, criteriaBuilder.equal(
-                        OfficeRoot.get("isActive"), officeView.getIsActive()));
+                        OfficeRoot.get("isActive"), officeViewFilter.getIsActive()));
             }
             criteriaQuery.where(filterPredicate);
         }

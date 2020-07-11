@@ -3,8 +3,8 @@ package com.zelosin.bellproject.dao.repository.employee;
 import com.zelosin.bellproject.dao.model.*;
 import com.zelosin.bellproject.dao.repository.template.AbstractBellDao;
 import com.zelosin.bellproject.exception.DataBaseResultException;
-import com.zelosin.bellproject.view.EmployeeView;
-import com.zelosin.bellproject.view.OfficeView;
+import com.zelosin.bellproject.view.filter.EmployeeViewFilter;
+import com.zelosin.bellproject.view.transfer.EmployeeViewTransfer;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Repository;
 
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository("EMP_REP")
-public class EmployeeDao extends AbstractBellDao<EmployeeView, Employee> {
+public class EmployeeDao extends AbstractBellDao<EmployeeViewFilter, EmployeeViewTransfer, Employee> {
 
     protected EmployeeDao(EntityManager entityManager) {
         super(entityManager);
@@ -54,11 +54,6 @@ public class EmployeeDao extends AbstractBellDao<EmployeeView, Employee> {
         if(employee.getOffice() != null) {
             employee.setOffice(findOfficeById(employee.getOffice().getId()));
         }
-        employee.setPosition(findPositionById(employee.getPosition().getId()));
-        if(employee.getDocument() != null){
-            employee.getDocument().setDocumentInfo(getDocumentTypeByCode(employee.getDocument().getDocumentInfo().getCode()));
-            employee.getDocument().setEmployee(employee);
-        }
         if(employee.getCitizenship() != null){
             employee.getCitizenship().setCitizenedCountry(getCountryByCode(employee.getCitizenship().getCitizenedCountry().getCode()));
         }
@@ -78,36 +73,36 @@ public class EmployeeDao extends AbstractBellDao<EmployeeView, Employee> {
     }
 
     @Override
-    public List<Employee> getList(EmployeeView employeeView) {
+    public List<Employee> getList(EmployeeViewFilter employeeViewFilter) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Employee> criteriaQuery = criteriaBuilder.createQuery(Employee.class);
         Root<Employee> employeeRoot = criteriaQuery.from(Employee.class);
         criteriaQuery.select(employeeRoot);
-        if(employeeView != null){
-            Predicate filterPredicate = criteriaBuilder.equal(employeeRoot.get("office").get("id"), employeeView.getOfficeId());
-            if(employeeView.getFirstName() != null){
+        if(employeeViewFilter != null){
+            Predicate filterPredicate = criteriaBuilder.equal(employeeRoot.get("office").get("id"), employeeViewFilter.getOfficeId());
+            if(employeeViewFilter.getFirstName() != null){
                 filterPredicate  = criteriaBuilder.and(filterPredicate, criteriaBuilder.equal(
-                        employeeRoot.get("firstName"), employeeView.getFirstName()));
+                        employeeRoot.get("firstName"), employeeViewFilter.getFirstName()));
             }
-            if(employeeView.getSecondName() != null){
+            if(employeeViewFilter.getSecondName() != null){
                 filterPredicate  = criteriaBuilder.and(filterPredicate, criteriaBuilder.equal(
-                        employeeRoot.get("secondName"), employeeView.getSecondName()));
+                        employeeRoot.get("secondName"), employeeViewFilter.getSecondName()));
             }
-            if(employeeView.getMiddleName() != null){
+            if(employeeViewFilter.getMiddleName() != null){
                 filterPredicate  = criteriaBuilder.and(filterPredicate, criteriaBuilder.equal(
-                        employeeRoot.get("middleName"), employeeView.getMiddleName()));
+                        employeeRoot.get("middleName"), employeeViewFilter.getMiddleName()));
             }
-            if(employeeView.getPositionId() != null){
+            if(employeeViewFilter.getPosition() != null){
                 filterPredicate  = criteriaBuilder.and(filterPredicate, criteriaBuilder.equal(
-                        employeeRoot.get("position").get("id"), employeeView.getPositionId()));
+                        employeeRoot.get("position"), employeeViewFilter.getPosition()));
             }
-            if(employeeView.getDocumentCode() != null){
+            if(employeeViewFilter.getDocumentCode() != null){
                 filterPredicate  = criteriaBuilder.and(filterPredicate, criteriaBuilder.equal(
-                        employeeRoot.get("document").get("documentInfo").get("code"), employeeView.getDocumentCode()));
+                        employeeRoot.get("document").get("documentInfo").get("code"), employeeViewFilter.getDocumentCode()));
             }
-            if(employeeView.getCitizenshipCode() != null){
+            if(employeeViewFilter.getCitizenshipCode() != null){
                 filterPredicate  = criteriaBuilder.and(filterPredicate, criteriaBuilder.equal(
-                        employeeRoot.get("citizenship").get("citizenedCountry").get("code"), employeeView.getCitizenshipCode()));
+                        employeeRoot.get("citizenship").get("citizenedCountry").get("code"), employeeViewFilter.getCitizenshipCode()));
             }
             criteriaQuery.where(filterPredicate);
         }

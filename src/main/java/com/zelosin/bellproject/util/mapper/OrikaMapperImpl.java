@@ -1,4 +1,4 @@
-package com.zelosin.bellproject.dao.mapper;
+package com.zelosin.bellproject.util.mapper;
 
 import ma.glasnost.orika.MapperFactory;
 import org.springframework.stereotype.Service;

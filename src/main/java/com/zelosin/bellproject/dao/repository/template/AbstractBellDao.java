@@ -3,18 +3,22 @@ package com.zelosin.bellproject.dao.repository.template;
 import com.zelosin.bellproject.dao.model.Country;
 import com.zelosin.bellproject.dao.model.DocumentType;
 import com.zelosin.bellproject.dao.model.Office;
-import com.zelosin.bellproject.dao.model.Position;
 import com.zelosin.bellproject.exception.DataBaseResultException;
 import org.hibernate.Session;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.BeanUtils;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.List;
 
 @Repository
-public abstract class AbstractBellDao<D, E> implements BellDao<D, E> {
+public abstract class AbstractBellDao<F, D, E> implements BellDao<F, D, E> {
 
     protected final EntityManager entityManager;
 
@@ -32,7 +36,11 @@ public abstract class AbstractBellDao<D, E> implements BellDao<D, E> {
     @Override
     public void save(E e) {
         resolveInnerElementDependecy(e);
-        entityManager.unwrap(Session.class).save(e);
+        try {
+            entityManager.unwrap(Session.class).save(e);
+        }catch (ConstraintViolationException  exception){
+            throw new DataBaseResultException("Не удалось вставить повторяющиеся значения", exception);
+        }
     }
 
     protected Country getCountryByCode(int code){
@@ -72,17 +80,12 @@ public abstract class AbstractBellDao<D, E> implements BellDao<D, E> {
         return office;
     }
 
-    protected Position findPositionById(int id){
-        Position position;
-        TypedQuery<Position> positionTypedQuery  = entityManager.createQuery(
-                "SELECT p FROM Position p WHERE p.id=:posId", Position.class);
-        positionTypedQuery.setParameter("posId", id);
-        try {
-            position = positionTypedQuery.getSingleResult();
-        }catch (NoResultException e){
-            throw new DataBaseResultException("Идентификатор должности задан неверно", e);
-        }
-        return position;
-    }
+    @Override
+    public abstract void resolveInnerElementDependecy(E e);
 
+    @Override
+    public abstract E findById(int id);
+
+    @Override
+    public abstract List<E> getList(F f);
 }

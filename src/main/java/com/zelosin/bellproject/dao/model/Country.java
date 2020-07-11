@@ -1,7 +1,7 @@
 package com.zelosin.bellproject.dao.model;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.zelosin.bellproject.dao.transfer.Transfer;
+import com.zelosin.bellproject.util.Transfer;
 import lombok.Data;
 
 import javax.persistence.*;

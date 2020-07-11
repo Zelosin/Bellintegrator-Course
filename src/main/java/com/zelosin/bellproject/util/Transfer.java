@@ -1,4 +1,4 @@
-package com.zelosin.bellproject.dao.transfer;
+package com.zelosin.bellproject.util;
 
 public class Transfer {
     public interface Save{}

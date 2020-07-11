@@ -4,8 +4,6 @@ package com.zelosin.bellproject.dao.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @Entity
@@ -59,14 +57,8 @@ public class Employee {
     /**
      * Должность
      */
-    @OneToOne(cascade = {
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST,
-            CascadeType.REFRESH
-    })
-    @JoinColumn(name = "position_id")
-    private Position position;
+    @Column(name = "position", nullable = false, length = 20)
+    private String position;
 
     /**
      * Офис сотрудника

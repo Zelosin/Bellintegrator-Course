@@ -1,6 +1,7 @@
 package com.zelosin.bellproject.dao.model;
 
 import lombok.Data;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,12 +61,6 @@ public class Office {
     })
     @JoinColumn(name = "organization_id")
     private Organization organization;
-
-    /**
-     * Список должностей
-     */
-    @OneToMany(mappedBy = "office", fetch = FetchType.LAZY)
-    private List<Position> positionList = new ArrayList<>();
 
     /**
      * Список сотрудников

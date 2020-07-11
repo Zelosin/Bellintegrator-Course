@@ -34,23 +34,6 @@ CREATE TABLE IF NOT EXISTS Office(
     FOREIGN KEY (organization_id)                   REFERENCES Organization(id)
 )COMMENT 'Офисы';
 
-CREATE TABLE IF NOT EXISTS Employee_Position_Info(
-    id                      INT NOT NULL            COMMENT 'Идентификатор' AUTO_INCREMENT,
-    name                    VARCHAR(30) NOT NULL    COMMENT 'Название',
-    version                 INT NOT NULL DEFAULT 0  COMMENT 'Служебное поле hibernate',
-    PRIMARY KEY (id)
-)COMMENT 'Информация о должностях';
-
-CREATE TABLE IF NOT EXISTS Employee_Position(
-    id                      INT NOT NULL            COMMENT 'Идентификатор' AUTO_INCREMENT,
-    office_id               INT NOT NULL            COMMENT 'Офис должности',
-    position_info_id        INT NOT NULL            COMMENT 'Информация о должности',
-    version                 INT NOT NULL DEFAULT 0  COMMENT 'Служебное поле hibernate',
-    PRIMARY KEY (id),
-    FOREIGN KEY (office_id)                         REFERENCES Office(id),
-    FOREIGN KEY (position_info_id)                  REFERENCES Employee_Position_Info(id)
-)COMMENT 'Должности работы';
-
 CREATE TABLE IF NOT EXISTS Document_Type(
     id                      INT NOT NULL            COMMENT 'Идентификатор' AUTO_INCREMENT ,
     name                    VARCHAR(150) NOT NULL   COMMENT 'Название',
@@ -65,12 +48,11 @@ CREATE TABLE IF NOT EXISTS Employee(
     second_name             VARCHAR(20)             COMMENT 'Фамилия',
     middle_name             VARCHAR(20)             COMMENT 'Отчество',
     phone                   VARCHAR(20)             COMMENT 'Телефон',
-    position_id             INT NOT NULL            COMMENT 'Должность',
+    position                VARCHAR(20) NOT NULL    COMMENT 'Должность',
     office_id               INT NOT NULL            COMMENT 'Офис сотрудника',
     is_identified           BOOL DEFAULT FALSE      COMMENT 'Признак идентифицированности',
     version                 INT NOT NULL DEFAULT 0  COMMENT 'Служебное поле hibernate',
     PRIMARY KEY (id),
-    FOREIGN KEY (position_id)                       REFERENCES Employee_Position(id),
     FOREIGN KEY (office_id)                         REFERENCES Office(id)
 )COMMENT 'Сотрудники';
 
@@ -100,7 +82,6 @@ CREATE TABLE IF NOT EXISTS Citizenship(
 
 
 CREATE UNIQUE INDEX UX_Country_Code                 ON Country(code);
-CREATE UNIQUE INDEX UX_Employee_Position_Id         ON Employee(position_id);
 CREATE UNIQUE INDEX UX_Document_Employee_Id         ON Document(employee_id);
 CREATE UNIQUE INDEX UX_Organization_Name_Full_Name  ON Organization(name, full_name);
 CREATE UNIQUE INDEX UX_Organization_inn_kpp         ON Organization(inn, kpp);
@@ -118,12 +99,10 @@ CREATE INDEX        IX_Employee_Office_Id           ON Employee(office_id);
 CREATE INDEX        IX_Employee_First_Name          ON Employee(first_name);
 CREATE INDEX        IX_Employee_Second_Name         ON Employee(second_name);
 CREATE INDEX        IX_Employee_Middle_Name         ON Employee(middle_name);
-CREATE INDEX        IX_Employee_Position_Id         ON Employee(position_id);
+CREATE INDEX        IX_Employee_Position            ON Employee(position);
 
 CREATE INDEX        IX_Document_Employee_Id         ON Document(employee_id);
-CREATE INDEX        IX_Document_Document_Type       ON Document(document_type);
 
 CREATE INDEX        IX_Citizenship_Employee_Id      ON Citizenship(employee_id);
 
-CREATE INDEX        IX_Position_Position_Info       ON Employee_Position(position_info_id);
-CREATE INDEX        IX_Position_Office_Id           ON Employee_Position(office_id);
+CREATE INDEX        IX_Document_Type_Code           ON Document_Type(code);

@@ -1,18 +1,18 @@
 package com.zelosin.bellproject.dao.model;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.zelosin.bellproject.dao.transfer.Transfer;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Entity
 @Table(name = "Organization")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Organization {
 
     /**
@@ -77,24 +77,5 @@ public class Organization {
     @ManyToOne
     @JoinColumn(name = "base_country_id")
     private Country baseCountry;
-
-    /**
-     * Список офисов
-     */
-    @OneToMany(
-            mappedBy = "organization",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
-    private List<Office> officeList = new ArrayList<>();
-
-    /**
-     * Добавление нового офиса
-     * @param office - типовой офис
-     */
-    public synchronized void addOffice(Office office){
-        office.setOrganization(this);
-        officeList.add(office);
-    }
 
 }

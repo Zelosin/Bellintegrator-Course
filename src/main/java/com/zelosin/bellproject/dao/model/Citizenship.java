@@ -49,6 +49,7 @@ public class Citizenship {
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
+
 }
 
 
