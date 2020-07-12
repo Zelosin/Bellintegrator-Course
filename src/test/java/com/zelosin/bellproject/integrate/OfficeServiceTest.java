@@ -1,13 +1,10 @@
-package com.zelosin.bellproject.service;
+package com.zelosin.bellproject.integrate;
 
 import com.zelosin.bellproject.dao.model.Office;
-import com.zelosin.bellproject.dao.model.Organization;
 import com.zelosin.bellproject.exception.DataBaseResultException;
 import com.zelosin.bellproject.service.template.BellService;
 import com.zelosin.bellproject.view.filter.OfficeViewFilter;
-import com.zelosin.bellproject.view.filter.OrganizationViewFilter;
 import com.zelosin.bellproject.view.transfer.OfficeViewTransfer;
-import com.zelosin.bellproject.view.transfer.OrganizationViewTransfer;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.jupiter.api.Test;
@@ -88,5 +85,4 @@ class OfficeServiceTest {
 
 		Assert.assertEquals(officeViewTransfer, dataBaseElement);
 	}
-
 }

@@ -4,9 +4,18 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.zelosin.bellproject.util.Transfer;
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
+/**
+ * Entity-объект стран
+ */
 @Data
 @Entity
 @Table(name = "Country")
@@ -42,5 +51,4 @@ public class Country {
     @NotNull(groups = {Transfer.Update.class, Transfer.Save.class})
     @JsonView({Transfer.DetailView.class})
     private String name;
-
 }

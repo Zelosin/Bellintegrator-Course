@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
+/**
+ * Контроллер-обработчик организация-запросов
+ */
 @RestController
 @RequestMapping("/api/organization")
 public class OrganizationController extends AbstractBellController<OrganizationViewFilter, OrganizationViewTransfer, Organization> {

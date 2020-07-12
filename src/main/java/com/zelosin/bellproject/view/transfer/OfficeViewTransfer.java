@@ -10,6 +10,9 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 
+/**
+ * DTO офиса
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor

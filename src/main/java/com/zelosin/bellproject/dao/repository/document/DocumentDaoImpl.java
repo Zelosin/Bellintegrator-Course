@@ -1,7 +1,6 @@
 package com.zelosin.bellproject.dao.repository.document;
 
 import com.zelosin.bellproject.dao.model.DocumentType;
-import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -24,6 +23,6 @@ public class DocumentDaoImpl implements DocumentDao {
      */
     @Override
     public List<DocumentType> getDocumentTypes() {
-        return entityManager.unwrap(Session.class).createQuery("from Document").list();
+        return entityManager.createQuery("SELECT d FROM DocumentType d", DocumentType.class).getResultList();
     }
 }

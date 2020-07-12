@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Контроллер-обработчик офис-запросов
+ */
 @RestController
 @RequestMapping("/api/office")
 public class OfficeController  extends AbstractBellController<OfficeViewFilter, OfficeViewTransfer, Office> {

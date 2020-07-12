@@ -9,8 +9,12 @@ import ma.glasnost.orika.MapperFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * {@inheritDoc}
+ */
 @Service("EMP_SER")
 public class EmployeeServiceImpl extends AbstractBellService<EmployeeViewFilter, EmployeeViewTransfer, Employee> {
     public EmployeeServiceImpl(
@@ -19,18 +23,36 @@ public class EmployeeServiceImpl extends AbstractBellService<EmployeeViewFilter,
         super(organizationDao, orikaMapper);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public EmployeeViewTransfer getDTO(Employee employee) {
+        if(employee == null){
+            return new EmployeeViewTransfer();
+        }
         return orikaMapper.getMapperFacade().map(employee, EmployeeViewTransfer.class);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Employee getEntity(EmployeeViewTransfer employeeView) {
+        if(employeeView == null){
+            return new Employee();
+        }
         return orikaMapper.getMapperFacade().map(employeeView, Employee.class);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<EmployeeViewTransfer> getDTOList(List<Employee> employees) {
+        if(employees == null){
+            return new ArrayList<>();
+        }
         return orikaMapper.getMapperFacade().mapAsList(employees, EmployeeViewTransfer.class);
     }
 }

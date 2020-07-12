@@ -11,9 +11,8 @@ import java.util.List;
 public interface CountryDao {
 
     /**
-     * Получить список всех стран
-     * @return - коллекция типа List со всеми странами
+     * Получение списка всех стран
+     * @return коллекция типа List со всеми странами
      */
     List<Country> getCountryList();
-
 }

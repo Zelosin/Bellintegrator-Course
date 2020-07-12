@@ -4,8 +4,15 @@ import com.zelosin.bellproject.dao.model.Country;
 
 import java.util.List;
 
+/**
+ * Интерфейс сервисного уровня справочника стран
+ */
 public interface CountryService {
 
-    List<Country> getCountryList();
 
+    /**
+     * Получение списка стран
+     * @return список стран из Entity-объектов
+     */
+    List<Country> getCountryList();
 }

@@ -2,22 +2,17 @@ package com.zelosin.bellproject.controller;
 
 import com.zelosin.bellproject.service.provider.country.CountryService;
 import com.zelosin.bellproject.service.provider.document.DocumentService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.persistence.EntityManager;
-import java.util.Collections;
-import java.util.Map;
-
+/**
+ * Контроллер-обработчик справочных-запросов
+ */
 @RestController
 @RequestMapping("/api")
 public class ManualController {
-
-    @Autowired
-    private EntityManager entityManager;
 
     private final CountryService countryService;
     private final DocumentService documentService;
@@ -27,13 +22,21 @@ public class ManualController {
         this.documentService = documentService;
     }
 
+    /**
+     * Получение списка типа документво
+     * @return  список типов документов
+     */
     @PostMapping("/docs")
-    public Map provideDocumentTypesList(){
-        return Collections.singletonMap("data", documentService.getDocumentTypes());
+    public Object provideDocumentTypesList(){
+        return documentService.getDocumentTypes();
     }
 
+    /**
+     * Получение списка стран
+     * @return  список стран
+     */
     @GetMapping("/countries")
-    public Map provideCountryList(){
-        return Collections.singletonMap("data", countryService.getCountryList());
+    public Object provideCountryList(){
+        return countryService.getCountryList();
     }
 }

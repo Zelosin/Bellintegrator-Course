@@ -1,13 +1,9 @@
-package com.zelosin.bellproject.service;
+package com.zelosin.bellproject.integrate;
 
 import com.zelosin.bellproject.dao.model.Employee;
-import com.zelosin.bellproject.dao.model.Office;
-import com.zelosin.bellproject.exception.DataBaseResultException;
 import com.zelosin.bellproject.service.template.BellService;
 import com.zelosin.bellproject.view.filter.EmployeeViewFilter;
-import com.zelosin.bellproject.view.filter.OfficeViewFilter;
 import com.zelosin.bellproject.view.transfer.EmployeeViewTransfer;
-import com.zelosin.bellproject.view.transfer.OfficeViewTransfer;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.jupiter.api.Test;
@@ -19,7 +15,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.transaction.Transactional;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -75,5 +70,4 @@ class EmployeeServiceTest {
 		EmployeeViewTransfer dataBaseElement = bellEmployeeService.findById(testedElementId);
 		Assert.assertEquals(employeeViewTransfer.getFirstName(), dataBaseElement.getFirstName());
 	}
-
 }

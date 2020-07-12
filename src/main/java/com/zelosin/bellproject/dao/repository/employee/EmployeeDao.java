@@ -1,6 +1,8 @@
 package com.zelosin.bellproject.dao.repository.employee;
 
-import com.zelosin.bellproject.dao.model.*;
+import com.zelosin.bellproject.dao.model.Citizenship;
+import com.zelosin.bellproject.dao.model.Document;
+import com.zelosin.bellproject.dao.model.Employee;
 import com.zelosin.bellproject.dao.repository.template.AbstractBellDao;
 import com.zelosin.bellproject.exception.DataBaseResultException;
 import com.zelosin.bellproject.view.filter.EmployeeViewFilter;
@@ -18,6 +20,9 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * {@inheritDoc}
+ */
 @Repository("EMP_REP")
 public class EmployeeDao extends AbstractBellDao<EmployeeViewFilter, EmployeeViewTransfer, Employee> {
 
@@ -25,8 +30,14 @@ public class EmployeeDao extends AbstractBellDao<EmployeeViewFilter, EmployeeVie
         super(entityManager);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update(Employee employee, int id) {
+        if(employee == null){
+            throw new DataBaseResultException("rejected", new NullPointerException());
+        }
         Employee primeEmployee = findById(id);
 
         resolveInnerElementDependecy(employee);
@@ -49,8 +60,14 @@ public class EmployeeDao extends AbstractBellDao<EmployeeViewFilter, EmployeeVie
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void resolveInnerElementDependecy(Employee employee) {
+        if(employee == null){
+            throw new DataBaseResultException("rejected", new NullPointerException());
+        }
         if(employee.getOffice() != null) {
             employee.setOffice(findOfficeById(employee.getOffice().getId()));
         }
@@ -59,6 +76,9 @@ public class EmployeeDao extends AbstractBellDao<EmployeeViewFilter, EmployeeVie
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Employee findById(int id) {
         Employee employee;
@@ -72,8 +92,14 @@ public class EmployeeDao extends AbstractBellDao<EmployeeViewFilter, EmployeeVie
         return employee;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Employee> getList(EmployeeViewFilter employeeViewFilter) {
+        if(employeeViewFilter == null){
+            throw new DataBaseResultException("rejected", new NullPointerException());
+        }
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Employee> criteriaQuery = criteriaBuilder.createQuery(Employee.class);
         Root<Employee> employeeRoot = criteriaQuery.from(Employee.class);

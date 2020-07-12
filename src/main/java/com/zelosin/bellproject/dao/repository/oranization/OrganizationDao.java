@@ -1,13 +1,10 @@
 package com.zelosin.bellproject.dao.repository.oranization;
 
-import com.zelosin.bellproject.dao.model.Office;
 import com.zelosin.bellproject.dao.model.Organization;
 import com.zelosin.bellproject.dao.repository.template.AbstractBellDao;
 import com.zelosin.bellproject.exception.DataBaseResultException;
 import com.zelosin.bellproject.view.filter.OrganizationViewFilter;
-import com.zelosin.bellproject.view.transfer.OfficeViewTransfer;
 import com.zelosin.bellproject.view.transfer.OrganizationViewTransfer;
-import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -20,6 +17,9 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * {@inheritDoc}
+ */
 @Repository("ORG_REP")
 public class OrganizationDao extends AbstractBellDao<OrganizationViewFilter, OrganizationViewTransfer, Organization> {
 
@@ -27,13 +27,22 @@ public class OrganizationDao extends AbstractBellDao<OrganizationViewFilter, Org
         super(entityManager);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void resolveInnerElementDependecy(Organization organization) {
+        if(organization == null){
+            throw new DataBaseResultException("rejected", new NullPointerException());
+        }
         if(organization.getBaseCountry() != null) {
             organization.setBaseCountry(getCountryByCode(organization.getBaseCountry().getCode()));
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Organization findById(int id) {
         Organization organization;
@@ -48,8 +57,14 @@ public class OrganizationDao extends AbstractBellDao<OrganizationViewFilter, Org
         return organization;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Organization> getList(OrganizationViewFilter organizationViewFilter) {
+        if(organizationViewFilter == null){
+            throw new DataBaseResultException("rejected", new NullPointerException());
+        }
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Organization> criteriaQuery = criteriaBuilder.createQuery(Organization.class);
         Root<Organization> organizationRoot = criteriaQuery.from(Organization.class);
@@ -69,18 +84,3 @@ public class OrganizationDao extends AbstractBellDao<OrganizationViewFilter, Org
         return new ArrayList<>(entityManager.createQuery(criteriaQuery).getResultList());
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

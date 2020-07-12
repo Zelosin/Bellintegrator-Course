@@ -1,4 +1,4 @@
-package com.zelosin.bellproject.service;
+package com.zelosin.bellproject.integrate;
 
 import com.zelosin.bellproject.dao.model.Organization;
 import com.zelosin.bellproject.exception.DataBaseResultException;
@@ -104,5 +104,4 @@ class OrganizationServiceTest {
 
 		Assert.assertEquals(organizationViewTransfer, dataBaseElement);
 	}
-
 }

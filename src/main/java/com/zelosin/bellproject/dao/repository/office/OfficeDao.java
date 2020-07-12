@@ -18,14 +18,23 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * {@inheritDoc}
+ */
 @Repository("OFC_REP")
 public class OfficeDao extends AbstractBellDao<OfficeViewFilter, OfficeViewTransfer, Office> {
     protected OfficeDao(EntityManager entityManager) {
         super(entityManager);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void resolveInnerElementDependecy(Office office) {
+        if(office == null){
+            throw new DataBaseResultException("rejected", new NullPointerException());
+        }
         if(office.getBaseCountry() != null) {
             office.setBaseCountry(getCountryByCode(office.getBaseCountry().getCode()));
         }
@@ -43,13 +52,22 @@ public class OfficeDao extends AbstractBellDao<OfficeViewFilter, OfficeViewTrans
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Office findById(int id) {
         return findOfficeById(id);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Office> getList(OfficeViewFilter officeViewFilter) {
+        if(officeViewFilter == null){
+            throw new DataBaseResultException("rejected", new NullPointerException());
+        }
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Office> criteriaQuery = criteriaBuilder.createQuery(Office.class);
         Root<Office> OfficeRoot = criteriaQuery.from(Office.class);
@@ -72,5 +90,4 @@ public class OfficeDao extends AbstractBellDao<OfficeViewFilter, OfficeViewTrans
         }
         return new ArrayList<>(entityManager.createQuery(criteriaQuery).getResultList());
     }
-
 }

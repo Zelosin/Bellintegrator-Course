@@ -7,6 +7,9 @@ import lombok.Data;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
+/**
+ * Агрегационныый DTO для идентификации
+ */
 @Data
 public class IdentifiedView {
 
@@ -17,5 +20,4 @@ public class IdentifiedView {
     @Null(groups = {Transfer.Save.class})
     @JsonView({Transfer.ListView.class, Transfer.DetailView.class})
     protected Integer id;
-
 }

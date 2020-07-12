@@ -17,21 +17,21 @@ public interface OrikaMapper {
     /**
      * Запись занных из sourceObject в destinationObject
      *
-     * @param sourceObject
-     * @param destinationObject
-     * @param <S>
-     * @param <D>
+     * @param sourceObject      исходный объект
+     * @param destinationObject объект, в который надо преобразовать объект
+     * @param <S>               тип исходного объекта
+     * @param <D>               тип объекта, к который надо преобразовать исходный объект
      */
     <S, D> void map(S sourceObject, D destinationObject);
 
     /**
      * Преобразование коллекции оъектов
      *
-     * @param source
-     * @param destinationClass
-     * @param <S>
-     * @param <D>
-     * @return
+     * @param source           исходный список
+     * @param destinationClass класс, в который надо преобразовать объект
+     * @param <S>              тип исходного объекта
+     * @param <D>              тип объекта, к который надо преобразовать исходный объект
+     * @return список элементов
      */
     <S, D> List<D> mapAsList(Iterable<S> source, Class<D> destinationClass);
 }

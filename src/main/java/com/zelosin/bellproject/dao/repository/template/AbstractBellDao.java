@@ -7,16 +7,15 @@ import com.zelosin.bellproject.exception.DataBaseResultException;
 import org.hibernate.Session;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.BeanUtils;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
-import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.List;
 
+/**
+ * {@inheritDoc}
+ */
 @Repository
 public abstract class AbstractBellDao<F, D, E> implements BellDao<F, D, E> {
 
@@ -26,15 +25,27 @@ public abstract class AbstractBellDao<F, D, E> implements BellDao<F, D, E> {
         this.entityManager = entityManager;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update(E e, int id) {
+        if(e == null){
+            throw new DataBaseResultException("rejected", new NullPointerException());
+        }
         E primeE = findById(id);
         resolveInnerElementDependecy( e);
         BeanUtils.copyProperties(e, primeE, "version", "id");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void save(E e) {
+        if(e == null){
+            throw new DataBaseResultException("rejected", new NullPointerException());
+        }
         resolveInnerElementDependecy(e);
         try {
             entityManager.unwrap(Session.class).save(e);
@@ -43,6 +54,12 @@ public abstract class AbstractBellDao<F, D, E> implements BellDao<F, D, E> {
         }
     }
 
+
+    /**
+     * Получения страны по ее коду
+     * @param code код страны
+     * @return Entity-объект страны
+     */
     protected Country getCountryByCode(int code){
         Country country;
         TypedQuery<Country> countryTypedQuery = entityManager.createQuery("SELECT c FROM Country c WHERE c.code=:countryCode", Country.class);
@@ -55,6 +72,11 @@ public abstract class AbstractBellDao<F, D, E> implements BellDao<F, D, E> {
         return country;
     }
 
+    /**
+     * Получения типа документа по его коду
+     * @param code код типа документа
+     * @return Entity-объект типа документа
+     */
     protected DocumentType getDocumentTypeByCode(int code){
         DocumentType documentType;
         TypedQuery<DocumentType> documentTypeTypedQuery = entityManager.createQuery("SELECT d FROM DocumentType d WHERE d.code=:documentCode", DocumentType.class);
@@ -67,6 +89,12 @@ public abstract class AbstractBellDao<F, D, E> implements BellDao<F, D, E> {
         return documentType;
     }
 
+
+    /**
+     * Получение офиса по его идентификатору
+     * @param id идентификатор офиса
+     * @return Entity-объект офиса
+     */
     protected Office findOfficeById(int id){
         Office office;
         TypedQuery<Office> officeTypedQuery  = entityManager.createQuery(
@@ -79,13 +107,4 @@ public abstract class AbstractBellDao<F, D, E> implements BellDao<F, D, E> {
         }
         return office;
     }
-
-    @Override
-    public abstract void resolveInnerElementDependecy(E e);
-
-    @Override
-    public abstract E findById(int id);
-
-    @Override
-    public abstract List<E> getList(F f);
 }

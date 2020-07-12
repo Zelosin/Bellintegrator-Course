@@ -9,9 +9,8 @@ import java.util.List;
 public interface DocumentDao {
 
     /**
-     * Получить список всех типо документов
-     * @return - коллекция типа List со всеми странами
+     * Получение списка всех типов документов
+     * @return коллекция типа List со всеми странами
      */
     List<DocumentType> getDocumentTypes();
-
 }

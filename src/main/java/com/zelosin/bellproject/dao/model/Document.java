@@ -3,9 +3,24 @@ package com.zelosin.bellproject.dao.model;
 
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Version;
 import java.util.Date;
 
+/**
+ * Entity-объект документа
+ */
 @Data
 @Entity
 @Table(name = "Document")
@@ -23,7 +38,7 @@ public class Document {
      * Служебное поле hibernate
      */
     @Version
-    private Integer version;
+    private Integer version = 0;
 
     /**
      * Дата удостоверения
@@ -58,5 +73,4 @@ public class Document {
     )
     @JoinColumn(name = "employee_id")
     private Employee employee;
-
 }

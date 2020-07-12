@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * {@inheritDoc}
+ */
 @Service
 public class OrikaMapperImpl implements OrikaMapper{
 
@@ -30,9 +33,11 @@ public class OrikaMapperImpl implements OrikaMapper{
         mapperFactory.getMapperFacade().map(sourceObject, destinationObject);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public <S, D> List<D> mapAsList(Iterable<S> source, Class<D> destinationClass) {
         return mapperFactory.getMapperFacade().mapAsList(source, destinationClass);
     }
-
 }

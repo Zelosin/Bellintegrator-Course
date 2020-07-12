@@ -9,8 +9,10 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 
+/**
+ * DTO-фильтр организации
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
@@ -36,5 +38,4 @@ public class OrganizationViewFilter extends IdentifiedView {
      */
     @JsonView({Transfer.ListView.class})
     private Boolean isActive;
-
 }

@@ -11,8 +11,16 @@ import ma.glasnost.orika.impl.DefaultMapperFactory;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.stereotype.Service;
 
+/**
+ * Класс строитель-OrikaMapper'a
+ */
 @Service
 public class OrikaMapperBuilder implements FactoryBean<MapperFactory> {
+    /**
+     * Создание бина маппера
+     * @return бин маппера
+     * @throws Exception ошибка маппинга
+     */
     @Override
     public MapperFactory getObject() throws Exception {
         MapperFactory mapperFactory =
@@ -43,11 +51,19 @@ public class OrikaMapperBuilder implements FactoryBean<MapperFactory> {
         return mapperFactory;
     }
 
+    /**
+     * Полуение типа объекта
+     * @return тип объекта
+     */
     @Override
     public Class<?> getObjectType() {
         return MapperFactory.class;
     }
 
+    /**
+     * Является ли бин синглетоном
+     * @return логическое значение
+     */
     @Override
     public boolean isSingleton() {
         return true;

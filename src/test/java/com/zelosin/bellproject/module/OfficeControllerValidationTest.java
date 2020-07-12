@@ -1,4 +1,4 @@
-package com.zelosin.bellproject.validation;
+package com.zelosin.bellproject.module;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

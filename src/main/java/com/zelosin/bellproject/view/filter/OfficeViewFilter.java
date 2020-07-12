@@ -9,8 +9,10 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 
+/**
+ * DTO-фильтр офиса
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
@@ -41,5 +43,4 @@ public class OfficeViewFilter extends IdentifiedView {
      */
     @NotNull(groups = {Transfer.Filter.class, Transfer.Save.class})
     private Integer orgId;
-
 }

@@ -10,6 +10,9 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 
+/**
+ * DTO организации
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
@@ -65,4 +68,3 @@ public class OrganizationViewTransfer extends OrganizationViewFilter {
         this.baseCountryCode = baseCountryCode;
     }
 }
-

@@ -8,10 +8,14 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
+/**
+ * DTO user'a
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
