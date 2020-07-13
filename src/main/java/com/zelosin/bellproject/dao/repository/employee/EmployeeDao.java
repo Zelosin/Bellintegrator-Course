@@ -1,11 +1,10 @@
 package com.zelosin.bellproject.dao.repository.employee;
 
-import com.zelosin.bellproject.dao.model.Citizenship;
-import com.zelosin.bellproject.dao.model.Country;
 import com.zelosin.bellproject.dao.model.Document;
 import com.zelosin.bellproject.dao.model.Employee;
 import com.zelosin.bellproject.dao.repository.template.AbstractBellDao;
 import com.zelosin.bellproject.exception.DataBaseResultException;
+import com.zelosin.bellproject.exception.InnerProgramException;
 import com.zelosin.bellproject.view.filter.EmployeeViewFilter;
 import com.zelosin.bellproject.view.transfer.EmployeeViewTransfer;
 import org.springframework.beans.BeanUtils;
@@ -37,7 +36,7 @@ public class EmployeeDao extends AbstractBellDao<EmployeeViewFilter, EmployeeVie
     @Override
     public void update(Employee employee, int id) {
         if(employee == null){
-            throw new DataBaseResultException("rejected", new NullPointerException());
+            throw new InnerProgramException("Произошла внутреняя ошибка приложения", new NullPointerException());
         }
         Employee primeEmployee = findById(id);
 
@@ -65,7 +64,7 @@ public class EmployeeDao extends AbstractBellDao<EmployeeViewFilter, EmployeeVie
     @Override
     public void resolveInnerElementDependecy(Employee employee) {
         if(employee == null){
-            throw new DataBaseResultException("rejected", new NullPointerException());
+            throw new InnerProgramException("Произошла внутреняя ошибка приложения", new NullPointerException());
         }
         if(employee.getOffice() != null) {
             employee.setOffice(findOfficeById(employee.getOffice().getId()));
@@ -98,7 +97,7 @@ public class EmployeeDao extends AbstractBellDao<EmployeeViewFilter, EmployeeVie
     @Override
     public List<Employee> getList(EmployeeViewFilter employeeViewFilter) {
         if(employeeViewFilter == null){
-            throw new DataBaseResultException("rejected", new NullPointerException());
+            throw new InnerProgramException( new NullPointerException());
         }
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Employee> criteriaQuery = criteriaBuilder.createQuery(Employee.class);
@@ -122,9 +121,9 @@ public class EmployeeDao extends AbstractBellDao<EmployeeViewFilter, EmployeeVie
                 filterPredicate  = criteriaBuilder.and(filterPredicate, criteriaBuilder.equal(
                         employeeRoot.get("position"), employeeViewFilter.getPosition()));
             }
-            if(employeeViewFilter.getDocumentCode() != null){
+            if(employeeViewFilter.getDocCode() != null){
                 filterPredicate  = criteriaBuilder.and(filterPredicate, criteriaBuilder.equal(
-                        employeeRoot.get("document").get("documentInfo").get("code"), employeeViewFilter.getDocumentCode()));
+                        employeeRoot.get("document").get("documentInfo").get("code"), employeeViewFilter.getDocCode()));
             }
             if(employeeViewFilter.getCitizenshipCode() != null){
                 filterPredicate  = criteriaBuilder.and(filterPredicate, criteriaBuilder.equal(

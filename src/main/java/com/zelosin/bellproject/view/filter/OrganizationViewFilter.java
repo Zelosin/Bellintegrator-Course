@@ -5,7 +5,6 @@ import com.zelosin.bellproject.util.Transfer;
 import com.zelosin.bellproject.view.IdentifiedView;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;

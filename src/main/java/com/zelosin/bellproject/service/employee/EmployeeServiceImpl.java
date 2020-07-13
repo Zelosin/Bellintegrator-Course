@@ -2,6 +2,7 @@ package com.zelosin.bellproject.service.employee;
 
 import com.zelosin.bellproject.dao.model.Employee;
 import com.zelosin.bellproject.dao.repository.template.BellDao;
+import com.zelosin.bellproject.exception.InnerProgramException;
 import com.zelosin.bellproject.service.template.AbstractBellService;
 import com.zelosin.bellproject.view.filter.EmployeeViewFilter;
 import com.zelosin.bellproject.view.transfer.EmployeeViewTransfer;
@@ -9,7 +10,6 @@ import ma.glasnost.orika.MapperFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,7 +29,7 @@ public class EmployeeServiceImpl extends AbstractBellService<EmployeeViewFilter,
     @Override
     public EmployeeViewTransfer getDTO(Employee employee) {
         if(employee == null){
-            return new EmployeeViewTransfer();
+            throw new InnerProgramException( new NullPointerException());
         }
         return orikaMapper.getMapperFacade().map(employee, EmployeeViewTransfer.class);
     }
@@ -40,7 +40,7 @@ public class EmployeeServiceImpl extends AbstractBellService<EmployeeViewFilter,
     @Override
     public Employee getEntity(EmployeeViewTransfer employeeView) {
         if(employeeView == null){
-            return new Employee();
+            throw new InnerProgramException( new NullPointerException());
         }
         return orikaMapper.getMapperFacade().map(employeeView, Employee.class);
     }
@@ -51,7 +51,7 @@ public class EmployeeServiceImpl extends AbstractBellService<EmployeeViewFilter,
     @Override
     public List<EmployeeViewTransfer> getDTOList(List<Employee> employees) {
         if(employees == null){
-            return new ArrayList<>();
+            throw new InnerProgramException( new NullPointerException());
         }
         return orikaMapper.getMapperFacade().mapAsList(employees, EmployeeViewTransfer.class);
     }

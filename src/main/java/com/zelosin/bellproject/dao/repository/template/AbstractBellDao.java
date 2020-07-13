@@ -5,6 +5,7 @@ import com.zelosin.bellproject.dao.model.Country;
 import com.zelosin.bellproject.dao.model.DocumentType;
 import com.zelosin.bellproject.dao.model.Office;
 import com.zelosin.bellproject.exception.DataBaseResultException;
+import com.zelosin.bellproject.exception.InnerProgramException;
 import org.hibernate.Session;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.BeanUtils;
@@ -32,7 +33,7 @@ public abstract class AbstractBellDao<F, D, E> implements BellDao<F, D, E> {
     @Override
     public void update(E e, int id) {
         if(e == null){
-            throw new DataBaseResultException("rejected", new NullPointerException());
+            throw new InnerProgramException( new NullPointerException());
         }
         E primeE = findById(id);
         resolveInnerElementDependecy( e);
@@ -45,7 +46,7 @@ public abstract class AbstractBellDao<F, D, E> implements BellDao<F, D, E> {
     @Override
     public void save(E e) {
         if(e == null){
-            throw new DataBaseResultException("rejected", new NullPointerException());
+            throw new InnerProgramException( new NullPointerException());
         }
         resolveInnerElementDependecy(e);
         try {
@@ -54,7 +55,6 @@ public abstract class AbstractBellDao<F, D, E> implements BellDao<F, D, E> {
             throw new DataBaseResultException("Не удалось вставить повторяющиеся значения", exception);
         }
     }
-
 
     /**
      * Получения страны по ее коду
@@ -102,7 +102,6 @@ public abstract class AbstractBellDao<F, D, E> implements BellDao<F, D, E> {
         }
         return documentType;
     }
-
 
     /**
      * Получение офиса по его идентификатору

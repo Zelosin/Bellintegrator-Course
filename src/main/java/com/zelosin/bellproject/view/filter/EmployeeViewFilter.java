@@ -5,7 +5,6 @@ import com.zelosin.bellproject.util.Transfer;
 import com.zelosin.bellproject.view.IdentifiedView;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
@@ -41,7 +40,6 @@ public class EmployeeViewFilter extends IdentifiedView {
      * Офис сотрудника
      */
     @NotNull(groups = {Transfer.Save.class, Transfer.Filter.class, Transfer.Update.class})
-    @JsonView({Transfer.DetailView.class})
     private Integer officeId;
 
     /**
@@ -55,7 +53,7 @@ public class EmployeeViewFilter extends IdentifiedView {
      * Документ сотрудника
      */
     @JsonView({Transfer.DetailView.class})
-    private Integer documentCode;
+    private Integer docCode;
 
     /**
      * Код гражданства

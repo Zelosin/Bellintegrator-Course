@@ -41,10 +41,12 @@ public class OrikaMapperBuilder implements FactoryBean<MapperFactory> {
                 .register();
 
         mapperFactory.classMap(EmployeeViewTransfer.class, Employee.class)
-                .field("documentCode", "document.documentInfo.code")
+                .field("docCode", "document.documentInfo.code")
                 .field("officeId", "office.id")
-                .field("date", "document.date")
+                .field("docDate", "document.date")
+                .field("docName", "document.documentInfo.name")
                 .field("citizenshipCode", "citizenship.citizenedCountry.code")
+                .field("citizenshipName", "citizenship.name")
                 .byDefault()
                 .register();
 

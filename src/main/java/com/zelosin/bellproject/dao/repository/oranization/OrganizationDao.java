@@ -3,6 +3,7 @@ package com.zelosin.bellproject.dao.repository.oranization;
 import com.zelosin.bellproject.dao.model.Organization;
 import com.zelosin.bellproject.dao.repository.template.AbstractBellDao;
 import com.zelosin.bellproject.exception.DataBaseResultException;
+import com.zelosin.bellproject.exception.InnerProgramException;
 import com.zelosin.bellproject.view.filter.OrganizationViewFilter;
 import com.zelosin.bellproject.view.transfer.OrganizationViewTransfer;
 import org.springframework.stereotype.Repository;
@@ -33,7 +34,7 @@ public class OrganizationDao extends AbstractBellDao<OrganizationViewFilter, Org
     @Override
     public void resolveInnerElementDependecy(Organization organization) {
         if(organization == null){
-            throw new DataBaseResultException("rejected", new NullPointerException());
+            throw new InnerProgramException( new NullPointerException());
         }
         if(organization.getBaseCountry() != null) {
             organization.setBaseCountry(getCountryByCode(organization.getBaseCountry().getCode()));
@@ -63,7 +64,7 @@ public class OrganizationDao extends AbstractBellDao<OrganizationViewFilter, Org
     @Override
     public List<Organization> getList(OrganizationViewFilter organizationViewFilter) {
         if(organizationViewFilter == null){
-            throw new DataBaseResultException("rejected", new NullPointerException());
+            throw new InnerProgramException( new NullPointerException());
         }
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Organization> criteriaQuery = criteriaBuilder.createQuery(Organization.class);
