@@ -14,7 +14,6 @@ import javax.validation.constraints.NotNull;
  * DTO-фильтр user'a
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 public class EmployeeViewFilter extends IdentifiedView {

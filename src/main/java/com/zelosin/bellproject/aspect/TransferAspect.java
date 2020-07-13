@@ -2,6 +2,7 @@ package com.zelosin.bellproject.aspect;
 
 import com.zelosin.bellproject.view.DataView;
 import com.zelosin.bellproject.view.ErrorView;
+import com.zelosin.bellproject.view.ResultView;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -24,7 +25,10 @@ public class TransferAspect {
     @Around("execution(* com.zelosin.bellproject.controller..*(..) )")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         Object returnValue = joinPoint.proceed();
-        if((returnValue instanceof ResponseEntity) || (returnValue instanceof ErrorView)){
+        if(returnValue == null){
+            return new ResponseEntity<>(new ResultView("success"), HttpStatus.OK);
+        }
+        if(returnValue instanceof ErrorView){
             return returnValue;
         }
         else {

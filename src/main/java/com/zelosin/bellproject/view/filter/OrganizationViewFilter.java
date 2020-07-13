@@ -14,7 +14,6 @@ import javax.validation.constraints.NotNull;
  * DTO-фильтр организации
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrganizationViewFilter extends IdentifiedView {

@@ -42,12 +42,10 @@ public abstract class AbstractBellController<F, D, E>{
     /**
      * Сохранение объекта
      * @param d  DTO объекта
-     * @return  результат сохранения в виде DTO
      */
     @PostMapping("/save")
-    public ResponseEntity<Object> saveElement( @Validated(Transfer.Save.class) @RequestBody D d){
+    public void saveElement( @Validated(Transfer.Save.class) @RequestBody D d){
         bellService.save(d);
-        return new ResponseEntity<>(new ResultView("success"), HttpStatus.OK);
     }
 
     /**
@@ -64,11 +62,9 @@ public abstract class AbstractBellController<F, D, E>{
     /**
      * Обновление данных об элементе
      * @param d  DTO объекта
-     * @return  результат обновления
      */
     @PostMapping("/update")
-    public ResponseEntity<Object> updateElement(@Validated(Transfer.Update.class) @RequestBody D d) {
+    public void updateElement(@Validated(Transfer.Update.class) @RequestBody D d) {
         bellService.update(d);
-        return new ResponseEntity<>(new ResultView("success"), HttpStatus.OK);
     }
 }

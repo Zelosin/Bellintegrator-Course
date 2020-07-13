@@ -86,7 +86,7 @@ public class Employee {
     private Office office;
 
     /**
-     * Список граждаств сотрудника
+     * Граждаство сотрудника
      */
     @OneToOne(mappedBy = "employee")
     private Citizenship citizenship;
