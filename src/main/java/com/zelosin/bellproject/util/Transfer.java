@@ -29,4 +29,10 @@ public class Transfer {
      * Валидация при детальном отображении
      */
     public interface DetailView extends ListView{};
+
+
+    /**
+     * Результат
+     */
+    public interface ResultView{};
 }

@@ -44,6 +44,7 @@ public abstract class AbstractBellController<F, D, E>{
      * @param d  DTO объекта
      */
     @PostMapping("/save")
+    @JsonView({Transfer.ResultView.class})
     public void saveElement( @Validated(Transfer.Save.class) @RequestBody D d){
         bellService.save(d);
     }
@@ -64,6 +65,7 @@ public abstract class AbstractBellController<F, D, E>{
      * @param d  DTO объекта
      */
     @PostMapping("/update")
+    @JsonView({Transfer.ResultView.class})
     public void updateElement(@Validated(Transfer.Update.class) @RequestBody D d) {
         bellService.update(d);
     }

@@ -104,4 +104,5 @@ class OrganizationServiceTest {
 
 		Assert.assertEquals(organizationViewTransfer, dataBaseElement);
 	}
+
 }
