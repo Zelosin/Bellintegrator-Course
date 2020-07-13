@@ -1,5 +1,6 @@
 package com.zelosin.bellproject.dao.repository.template;
 
+import com.zelosin.bellproject.dao.model.Citizenship;
 import com.zelosin.bellproject.dao.model.Country;
 import com.zelosin.bellproject.dao.model.DocumentType;
 import com.zelosin.bellproject.dao.model.Office;
@@ -70,6 +71,19 @@ public abstract class AbstractBellDao<F, D, E> implements BellDao<F, D, E> {
             throw new DataBaseResultException("Указан несуществующий код страны", e);
         }
         return country;
+    }
+
+    protected Citizenship getCitizenshipByCountry(Country country){
+        Citizenship citizenship;
+        TypedQuery<Citizenship> citizenshipTypedQuery = entityManager.createQuery(
+                "SELECT c FROM Citizenship c WHERE c.citizenedCountry=:country", Citizenship.class);
+        citizenshipTypedQuery.setParameter("country", country);
+        try {
+            citizenship = citizenshipTypedQuery.getSingleResult();
+        }catch (NoResultException e){
+            throw new DataBaseResultException("Для данной страны в базе нет гражданства", e);
+        }
+        return citizenship;
     }
 
     /**

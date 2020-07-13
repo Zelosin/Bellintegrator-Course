@@ -10,6 +10,15 @@ insert into Country(name, code) values
 insert into Country(name, code) values
 ('Франция', 250);
 
+insert into citizenship(name, citizenship_country_id)
+values('Гражданство США', 3);
+insert into citizenship(name, citizenship_country_id)
+values('Гражданство РФ', 1);
+insert into citizenship(name, citizenship_country_id)
+values('Гражданство Германии', 2);
+insert into citizenship(name, citizenship_country_id)
+values('Гражданство Франции', 4);
+
 
 
 insert into Document_Type(name, code)
@@ -78,10 +87,10 @@ insert into office(name, phone, office_country_id, organization_id)
 values('Google GR', '+5555555', 3, 2);
 
 
-insert into employee(first_name, second_name, middle_name, phone, position, office_id)
-values('Иван', 'Иванов', 'Иванович', null, 'Junior developer', 1);
-insert into employee(first_name, second_name, middle_name, phone, position, office_id)
-values('Иван2', 'Иванов2', 'Иванович2', '+7777777', 'CEO', 1);
+insert into employee(first_name, second_name, middle_name, phone, position, office_id, citizenship_id)
+values('Иван', 'Иванов', 'Иванович', null, 'Junior developer', 1, 2);
+insert into employee(first_name, second_name, middle_name, phone, position, office_id, citizenship_id)
+values('Иван2', 'Иванов2', 'Иванович2', '+7777777', 'CEO', 1, 1);
 
 
 insert into document(document_type, assign_date, employee_id)
@@ -89,8 +98,3 @@ values(10, '2015-12-17', 1);
 insert into document(document_type, assign_date, employee_id)
 values(12, '2019-12-19', 2);
 
-
-insert into citizenship(name, citizenship_country_id, employee_id)
-values('Гражданство США', 3, 1);
-insert into citizenship(name, citizenship_country_id, employee_id)
-values('Гражданство РФ', 1, 2);
