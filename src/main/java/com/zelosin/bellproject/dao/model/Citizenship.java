@@ -46,7 +46,7 @@ public class Citizenship {
     /**
      * Страна гражданства
      */
-    @ManyToOne(cascade = {
+    @OneToOne(cascade = {
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST,
@@ -55,10 +55,4 @@ public class Citizenship {
     @JoinColumn(name = "citizenship_country_id")
     private Country citizenedCountry;
 
-    /**
-     * Сотрудник, которому принадлежит гражданство
-     */
-    @OneToOne
-    @JoinColumn(name = "employee_id")
-    private Employee employee;
 }

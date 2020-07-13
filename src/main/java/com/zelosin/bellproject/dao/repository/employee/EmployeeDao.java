@@ -1,6 +1,7 @@
 package com.zelosin.bellproject.dao.repository.employee;
 
 import com.zelosin.bellproject.dao.model.Citizenship;
+import com.zelosin.bellproject.dao.model.Country;
 import com.zelosin.bellproject.dao.model.Document;
 import com.zelosin.bellproject.dao.model.Employee;
 import com.zelosin.bellproject.dao.repository.template.AbstractBellDao;
@@ -51,12 +52,10 @@ public class EmployeeDao extends AbstractBellDao<EmployeeViewFilter, EmployeeVie
             primeEmployee.getDocument().setDate(employee.getDocument().getDate());
         }
         if(employee.getCitizenship() != null){
-            if(primeEmployee.getCitizenship() == null){
-                primeEmployee.setCitizenship(new Citizenship());
-                primeEmployee.getCitizenship().setEmployee(primeEmployee);
+            if(primeEmployee.getCitizenship() != null){
+                primeEmployee.getCitizenship().setCitizenedCountry(employee.getCitizenship().getCitizenedCountry());
+                primeEmployee.getCitizenship().setName(employee.getCitizenship().getName());
             }
-            primeEmployee.getCitizenship().setCitizenedCountry(employee.getCitizenship().getCitizenedCountry());
-            primeEmployee.getCitizenship().setName(employee.getCitizenship().getName());
         }
     }
 
@@ -72,7 +71,8 @@ public class EmployeeDao extends AbstractBellDao<EmployeeViewFilter, EmployeeVie
             employee.setOffice(findOfficeById(employee.getOffice().getId()));
         }
         if(employee.getCitizenship() != null){
-            employee.getCitizenship().setCitizenedCountry(getCountryByCode(employee.getCitizenship().getCitizenedCountry().getCode()));
+            employee.setCitizenship(
+                getCitizenshipByCountry(getCountryByCode(employee.getCitizenship().getCitizenedCountry().getCode())));
         }
     }
 

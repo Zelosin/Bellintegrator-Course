@@ -88,7 +88,13 @@ public class Employee {
     /**
      * Граждаство сотрудника
      */
-    @OneToOne(mappedBy = "employee")
+    @ManyToOne(cascade = {
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST,
+            CascadeType.REFRESH
+    })
+    @JoinColumn(name = "citizenship_id")
     private Citizenship citizenship;
 
     /**

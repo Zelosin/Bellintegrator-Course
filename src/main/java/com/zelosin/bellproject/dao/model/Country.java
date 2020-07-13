@@ -6,9 +6,11 @@ import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
@@ -27,7 +29,6 @@ public class Country {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull(groups = {Transfer.Update.class})
     private int id;
 
     /**
@@ -40,15 +41,13 @@ public class Country {
      * Код
      */
     @Column(name = "code")
-    @NotNull(groups = {Transfer.Update.class, Transfer.Save.class})
-    @JsonView({Transfer.DetailView.class})
     private int code;
 
     /**
      * Название
      */
     @Column(name = "Name", length = 20, nullable = false)
-    @NotNull(groups = {Transfer.Update.class, Transfer.Save.class})
-    @JsonView({Transfer.DetailView.class})
     private String name;
+
+
 }
