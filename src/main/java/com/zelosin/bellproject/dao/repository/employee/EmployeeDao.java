@@ -1,13 +1,7 @@
 package com.zelosin.bellproject.dao.repository.employee;
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
 import com.zelosin.bellproject.dao.model.Citizenship;
 import com.zelosin.bellproject.dao.model.Country;
->>>>>>> 53e6dc6dc7538fc13674a77d6da1d81cf1d13bda
->>>>>>> cf24eb16aa0877ccc9e1c1c5a9ebdc079dedb3b5
 import com.zelosin.bellproject.dao.model.Document;
 import com.zelosin.bellproject.dao.model.Employee;
 import com.zelosin.bellproject.dao.repository.template.AbstractBellDao;
