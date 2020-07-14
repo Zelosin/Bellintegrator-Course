@@ -4,6 +4,7 @@ import com.zelosin.bellproject.dao.model.Office;
 import com.zelosin.bellproject.dao.model.Organization;
 import com.zelosin.bellproject.dao.repository.template.AbstractBellDao;
 import com.zelosin.bellproject.exception.DataBaseResultException;
+import com.zelosin.bellproject.exception.InnerProgramException;
 import com.zelosin.bellproject.view.filter.OfficeViewFilter;
 import com.zelosin.bellproject.view.transfer.OfficeViewTransfer;
 import org.springframework.stereotype.Repository;
@@ -33,7 +34,7 @@ public class OfficeDao extends AbstractBellDao<OfficeViewFilter, OfficeViewTrans
     @Override
     public void resolveInnerElementDependecy(Office office) {
         if(office == null){
-            throw new DataBaseResultException("rejected", new NullPointerException());
+            throw new InnerProgramException( new NullPointerException());
         }
         if(office.getBaseCountry() != null) {
             office.setBaseCountry(getCountryByCode(office.getBaseCountry().getCode()));
@@ -66,7 +67,7 @@ public class OfficeDao extends AbstractBellDao<OfficeViewFilter, OfficeViewTrans
     @Override
     public List<Office> getList(OfficeViewFilter officeViewFilter) {
         if(officeViewFilter == null){
-            throw new DataBaseResultException("rejected", new NullPointerException());
+            throw new InnerProgramException( new NullPointerException());
         }
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Office> criteriaQuery = criteriaBuilder.createQuery(Office.class);

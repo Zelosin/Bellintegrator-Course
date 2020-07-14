@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -81,7 +82,8 @@ public class Employee {
             CascadeType.MERGE,
             CascadeType.PERSIST,
             CascadeType.REFRESH
-    })
+        }, fetch = FetchType.LAZY
+    )
     @JoinColumn(name = "office_id")
     private Office office;
 
@@ -93,7 +95,8 @@ public class Employee {
             CascadeType.MERGE,
             CascadeType.PERSIST,
             CascadeType.REFRESH
-    })
+        }, fetch = FetchType.LAZY
+    )
     @JoinColumn(name = "citizenship_id")
     private Citizenship citizenship;
 
@@ -102,7 +105,8 @@ public class Employee {
      */
     @OneToOne(
             cascade = CascadeType.ALL,
-            mappedBy = "employee"
+            mappedBy = "employee",
+            fetch = FetchType.LAZY
     )
     private Document document;
 }

@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Входная точка приложения
  */
 @SpringBootApplication
-public class BellProjectApplication {
+public class BellProjectApplication{
 
 	public static void main(String[] args) {
 		SpringApplication.run(BellProjectApplication.class, args);

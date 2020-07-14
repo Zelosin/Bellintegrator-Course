@@ -72,7 +72,8 @@ public class Office {
             CascadeType.MERGE,
             CascadeType.PERSIST,
             CascadeType.REFRESH
-    })
+        }, fetch = FetchType.LAZY
+    )
     @JoinColumn(name = "organization_id")
     private Organization organization;
 

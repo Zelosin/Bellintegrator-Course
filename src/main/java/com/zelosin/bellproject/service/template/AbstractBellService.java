@@ -1,7 +1,7 @@
 package com.zelosin.bellproject.service.template;
 
 import com.zelosin.bellproject.dao.repository.template.BellDao;
-import com.zelosin.bellproject.exception.DataBaseResultException;
+import com.zelosin.bellproject.exception.InnerProgramException;
 import com.zelosin.bellproject.view.IdentifiedView;
 import ma.glasnost.orika.MapperFactory;
 import org.springframework.stereotype.Service;
@@ -41,7 +41,7 @@ public abstract class AbstractBellService<F, D extends IdentifiedView, E> implem
     @Transactional
     public void update(D d) {
         if(d == null){
-            throw new DataBaseResultException("rejected", new NullPointerException());
+            throw new InnerProgramException( new NullPointerException());
         }
         bellDao.update(getEntity(d), d.getId());
     }
@@ -53,7 +53,7 @@ public abstract class AbstractBellService<F, D extends IdentifiedView, E> implem
     @Transactional
     public void save(D d) {
         if(d == null){
-            throw new DataBaseResultException("rejected", new NullPointerException());
+            throw new InnerProgramException( new NullPointerException());
         }
         bellDao.save(getEntity(d));
     }
@@ -65,7 +65,7 @@ public abstract class AbstractBellService<F, D extends IdentifiedView, E> implem
     @Transactional
     public List<D> getList(F f) {
         if(f == null){
-            throw new DataBaseResultException("rejected", new NullPointerException());
+            throw new InnerProgramException( new NullPointerException());
         }
         List<E> e = bellDao.getList(f);
         return getDTOList(e);

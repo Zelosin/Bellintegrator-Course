@@ -5,7 +5,6 @@ import com.zelosin.bellproject.util.Transfer;
 import com.zelosin.bellproject.view.filter.OfficeViewFilter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
@@ -14,7 +13,6 @@ import javax.validation.constraints.NotNull;
  * DTO офиса
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class OfficeViewTransfer extends OfficeViewFilter {

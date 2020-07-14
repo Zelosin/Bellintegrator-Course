@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -56,7 +57,8 @@ public class Document {
                 CascadeType.MERGE,
                 CascadeType.PERSIST,
                 CascadeType.REFRESH
-    })
+            }, fetch = FetchType.LAZY
+    )
     @JoinColumn(name = "document_type")
     private DocumentType documentInfo;
 
@@ -69,7 +71,7 @@ public class Document {
                 CascadeType.MERGE,
                 CascadeType.PERSIST,
                 CascadeType.REFRESH
-            }
+            }, fetch = FetchType.LAZY
     )
     @JoinColumn(name = "employee_id")
     private Employee employee;
