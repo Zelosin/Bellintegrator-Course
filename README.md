@@ -5,7 +5,6 @@
     <a href="#bd"><li>Конфигурация базы данных</li></a>
     <a href="#start"><li>Запуск программы</li></a>
     <a href="#model"><li>Модель данных</li></a>
-    <a href="#comm"><li>Комментарии разработчика</li></a>
   </ul>
 
 <h3><a id="bd"></a>Конфигурация базы данных</h3>
@@ -66,7 +65,7 @@ FLUSH PRIVILEGES;
   </ol> 
   
 <h3><a id="start"></a>Запуск программы</h3>
-  Программа запускается следующей иструкцией коммандной строки:<br>
+  Программа запускается следующей иструкцией командной строки:<br>
   
 ```
 java -jar bell-project.jar
@@ -79,30 +78,22 @@ java -jar bell-project.jar
 
 <h5>Пример запросов через PostmanCanary:</h5>
 
-<img src="https://user-images.githubusercontent.com/34071380/87419668-9286b480-c5dc-11ea-9e0c-8e10d03fd6bd.png"
-style="{
-  float: left;
-  width: 33.33%;
-  padding: 5px;
-}">
+<img src="https://user-images.githubusercontent.com/34071380/87419668-9286b480-c5dc-11ea-9e0c-8e10d03fd6bd.png">
 
-<img src="https://user-images.githubusercontent.com/34071380/87419668-9286b480-c5dc-11ea-9e0c-8e10d03fd6bd.png"
-style="{
-  float: left;
-  width: 33.33%;
-  padding: 5px;
-}">
+<img src="https://user-images.githubusercontent.com/34071380/87419672-931f4b00-c5dc-11ea-9bf4-d47f66d4e0c1.png">
 
 <h3><a id="model"></a>Модель данных</h3>
 
+<h5>Изначальноспроектированная модель данных:</h5>
 
 <img src="https://user-images.githubusercontent.com/34071380/87060287-060e7780-c213-11ea-9daf-228f24d5f856.jpg">
 
+<h5>Модель данных в процессе разработки: </h5>
+
 <img src="https://user-images.githubusercontent.com/34071380/87060123-d0698e80-c212-11ea-8eaf-4c15c077a079.png">
 
+<h5>Конечная версия: </h5>
+
 <img src="https://user-images.githubusercontent.com/34071380/87411552-8b59a980-c5d0-11ea-8b22-23eac0be9d24.png">
-
-<h3><a id="comm"></a>Комментарии разработчика</h3>
-
 
 
