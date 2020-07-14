@@ -78,10 +78,20 @@ java -jar bell-project.jar
 После этого по адресу <a href="http://localhost:8080"> localhost:8080 </a> будут обрабатываться необходимые запросы. 
 
 <h5>Пример запросов через PostmanCanary:</h5>
-<img src="https://user-images.githubusercontent.com/34071380/87419423-22782e80-c5dc-11ea-841e-9e4a82b26c9f.png">
 
-<img src="https://user-images.githubusercontent.com/34071380/87419278-e0e78380-c5db-11ea-82db-58b8c8bcd686.png">
+<img src="https://user-images.githubusercontent.com/34071380/87419668-9286b480-c5dc-11ea-9e0c-8e10d03fd6bd.png"
+style="{
+  float: left;
+  width: 33.33%;
+  padding: 5px;
+}">
 
+<img src="https://user-images.githubusercontent.com/34071380/87419668-9286b480-c5dc-11ea-9e0c-8e10d03fd6bd.png"
+style="{
+  float: left;
+  width: 33.33%;
+  padding: 5px;
+}">
 
 <h3><a id="model"></a>Модель данных</h3>
 
